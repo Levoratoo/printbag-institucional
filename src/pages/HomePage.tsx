@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import heroFactory from "@/assets/hero-factory.jpg";
 import sustainabilityHero from "@/assets/sustainability-hero.jpg";
-import productsCollection from "@/assets/products-collection.jpg";
+import cardPrintmoda from "@/assets/card-printmoda.jpg";
+import cardPrintfood from "@/assets/card-printfood.jpg";
 
 const clients = [
   { name: "Melissa", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Melissa_%28brand%29_logo.svg/200px-Melissa_%28brand%29_logo.svg.png" },
@@ -42,7 +43,7 @@ export default function HomePage() {
             alt="Fábrica Printbag - Linha de produção moderna" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-primary/60" />
+          <div className="absolute inset-0 bg-primary/80" />
         </div>
 
         {/* Content */}
@@ -65,7 +66,7 @@ export default function HomePage() {
               className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight mb-6"
             >
               Embalagens que{" "}
-              <span className="text-secondary">Transformam</span>{" "}
+              <span className="text-secondary" style={{ color: '#0a8a52' }}>Transformam</span>{" "}
               sua Marca
             </motion.h1>
 
@@ -73,7 +74,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl"
+              className="text-lg md:text-xl text-primary-foreground mb-8 max-w-2xl"
             >
               Há mais de 25 anos desenvolvendo soluções personalizadas em sacolas e embalagens 
               para as maiores marcas do Brasil. Qualidade, sustentabilidade e tecnologia.
@@ -179,14 +180,17 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-card rounded-2xl shadow-medium overflow-hidden border border-border hover:shadow-strong transition-shadow duration-300"
+              className="bg-card rounded-2xl shadow-medium overflow-hidden border border-border hover:shadow-strong transition-shadow duration-300 group"
             >
-              <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-4xl">👗</span>
-                  </div>
-                  <h3 className="text-2xl font-heading font-bold text-primary">Linha Printmoda</h3>
+              <div className="relative h-56 overflow-hidden">
+                <img 
+                  src={cardPrintmoda} 
+                  alt="Linha Printmoda - Sacolas e embalagens para moda"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute bottom-4 left-6">
+                  <h3 className="text-2xl font-heading font-bold text-white">Linha Printmoda</h3>
                 </div>
               </div>
               <div className="p-6">
@@ -221,14 +225,17 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-card rounded-2xl shadow-medium overflow-hidden border border-border hover:shadow-strong transition-shadow duration-300"
+              className="bg-card rounded-2xl shadow-medium overflow-hidden border border-border hover:shadow-strong transition-shadow duration-300 group"
             >
-              <div className="h-48 bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-4xl">🍔</span>
-                  </div>
-                  <h3 className="text-2xl font-heading font-bold text-secondary">Linha PrintFood</h3>
+              <div className="relative h-56 overflow-hidden">
+                <img 
+                  src={cardPrintfood} 
+                  alt="Linha PrintFood - Embalagens para alimentos"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute bottom-4 left-6">
+                  <h3 className="text-2xl font-heading font-bold text-white">Linha PrintFood</h3>
                 </div>
               </div>
               <div className="p-6">
