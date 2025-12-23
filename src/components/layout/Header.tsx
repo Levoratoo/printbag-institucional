@@ -61,6 +61,9 @@ export function Header() {
                 src={logoPrintbag} 
                 alt="Printbag Embalagens" 
                 className="h-12 w-auto"
+                style={{
+                  filter: 'brightness(0) saturate(100%) invert(21%) sepia(98%) saturate(1500%) hue-rotate(210deg) brightness(92%) contrast(95%)'
+                }}
               />
             </motion.div>
           </Link>
