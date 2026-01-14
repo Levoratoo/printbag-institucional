@@ -58,8 +58,8 @@ const clients = [
 const stats = [
   { value: "25+", label: "Anos de Experiência" },
   { value: "500+", label: "Clientes Atendidos" },
-  { value: "50M+", label: "Embalagens/Ano" },
-  { value: "99%", label: "Taxa de Satisfação" },
+  { value: "+10 mil", label: "Pontos de Venda Atendidos" },
+  { value: "+100 milhões", label: "Embalagens/Ano" },
 ];
 
 export default function HomePage() {
