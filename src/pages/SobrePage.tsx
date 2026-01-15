@@ -12,38 +12,50 @@ import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import factoryAerial from "@/assets/factory-aerial.jpg";
 import sobreHero from "@/assets/sobre-hero.jpg";
+import timeline1980 from "@/assets/timeline-1980.jpg";
+import timeline2010 from "@/assets/timeline-2010.jpg";
+import timeline2011 from "@/assets/timeline-2011.jpg";
+import timeline2015 from "@/assets/timeline-2015.jpg";
+import timeline2024 from "@/assets/timeline-2024.jpg";
+import timeline2025 from "@/assets/timeline-2025.jpg";
 
 
 const timeline = [
   {
     year: "1980",
     title: "Fundação",
-    description: "Início da trajetória da Printbag em Itajaí/SC como empresa familiar."
+    description: "Início da trajetória da Printbag em Itajaí/SC como empresa familiar.",
+    image: timeline1980
   },
   {
     year: "2010",
     title: "Aquisição",
-    description: "Aquisição da Printbag pela holding Weisul, que passa a gerir a empresa, trazendo mais solidez financeira e confiabilidade à marca."
+    description: "Aquisição da Printbag pela holding Weisul, que passa a gerir a empresa, trazendo mais solidez financeira e confiabilidade à marca.",
+    image: timeline2010
   },
   {
     year: "2011",
     title: "Nova Sede",
-    description: "Início da construção da nova sede em Camboriú (SC)."
+    description: "Início da construção da nova sede em Camboriú (SC).",
+    image: timeline2011
   },
   {
     year: "2015",
     title: "Centro de Distribuição",
-    description: "Aquisição de novo Centro de Distribuição dedicado ao armazenamento de produtos e insumos."
+    description: "Aquisição de novo Centro de Distribuição dedicado ao armazenamento de produtos e insumos.",
+    image: timeline2015
   },
   {
     year: "2024",
     title: "Expansão Logística",
-    description: "Um novo Centro de Distribuição em Itajaí (SC) é contratado pela empresa, acomodando toda a operação logística."
+    description: "Um novo Centro de Distribuição em Itajaí (SC) é contratado pela empresa, acomodando toda a operação logística.",
+    image: timeline2024
   },
   {
     year: "2025",
     title: "Investimento em Tecnologia",
-    description: "Investimento em novos equipamentos de última geração."
+    description: "Investimento em novos equipamentos de última geração.",
+    image: timeline2025
   }
 ];
 
@@ -249,7 +261,7 @@ export default function SobrePage() {
             {/* Timeline Line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border hidden lg:block" />
 
-            <div className="space-y-12">
+            <div className="space-y-16">
               {timeline.map((item, index) => (
                 <motion.div
                   key={item.year}
@@ -261,9 +273,9 @@ export default function SobrePage() {
                     index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                   }`}
                 >
-                  <div className={`lg:w-1/2 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
-                    <div className="bg-card rounded-xl p-6 border border-border inline-block">
-                      <div className="flex items-center gap-3 mb-3">
+                  <div className={`lg:w-1/2 ${index % 2 === 0 ? "lg:text-right lg:pr-8" : "lg:text-left lg:pl-8"}`}>
+                    <div className="bg-card rounded-xl p-6 border border-border shadow-medium">
+                      <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? "lg:justify-end" : ""}`}>
                         <Calendar className="w-5 h-5 text-primary" />
                         <span className="text-2xl font-heading font-bold text-primary">
                           {item.year}
@@ -272,9 +284,16 @@ export default function SobrePage() {
                       <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground mb-4">
                         {item.description}
                       </p>
+                      <div className="rounded-lg overflow-hidden">
+                        <img 
+                          src={item.image} 
+                          alt={`${item.title} - ${item.year}`}
+                          className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                     </div>
                   </div>
                   
