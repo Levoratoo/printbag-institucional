@@ -453,7 +453,7 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            {/* Supermercados */}
+            {/* Supermercados/Conveniência */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -462,10 +462,10 @@ export default function HomePage() {
               className="bg-card rounded-2xl shadow-medium overflow-hidden border border-border hover:shadow-strong transition-shadow duration-300 group flex flex-col"
             >
               <div className="relative h-40 overflow-hidden">
-                <img src={sectorSupermercados} alt="Embalagens Supermercados" className="w-full h-full object-cover" />
+                <img src={sectorSupermercados} alt="Embalagens Supermercados e Conveniência" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-6">
-                  <h3 className="text-xl font-heading font-bold text-white">Supermercados</h3>
+                  <h3 className="text-xl font-heading font-bold text-white">Supermercados/Conveniência</h3>
                 </div>
               </div>
               <div className="p-5 flex flex-col flex-grow">
@@ -486,7 +486,7 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            {/* Outros */}
+            {/* Atacado/Distribuidores */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -498,12 +498,12 @@ export default function HomePage() {
                 <Package className="w-16 h-16 text-primary/40" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-6">
-                  <h3 className="text-xl font-heading font-bold text-white">Outros</h3>
+                  <h3 className="text-xl font-heading font-bold text-white">Atacado/Distribuidores</h3>
                 </div>
               </div>
               <div className="p-5 flex flex-col flex-grow">
                 <div className="space-y-2 mb-5 flex-grow">
-                  {["Sacolas", "Sacos", "Caixas", "Envelopes", "Etiquetas", "Papel de Seda", "Papel Barreira", "Tags"].map((item) => (
+                  {["Sacolas", "Sacos", "Caixas", "Itens adicionais"].map((item) => (
                     <div key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                       <span className="text-foreground text-sm">{item}</span>
@@ -677,15 +677,12 @@ export default function HomePage() {
               Entre em contato com nossa equipe e descubra como podemos criar 
               a embalagem perfeita para o seu negócio.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Button variant="heroPrimary" size="xl" asChild className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                 <Link to="/contato">
-                  Solicite um Orçamento
+                  Fale com um Consultor
                   <ArrowRight className="w-5 h-5" />
                 </Link>
-              </Button>
-              <Button variant="heroSecondary" size="xl" asChild>
-                <Link to="/contato">Fale com um Consultor JIT</Link>
               </Button>
             </div>
           </motion.div>
