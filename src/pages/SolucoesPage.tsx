@@ -3,37 +3,74 @@ import { Link } from "react-router-dom";
 import { 
   ArrowRight,
   CheckCircle2,
-  Layers,
+  Package,
   Sparkles,
-  Box,
-  Printer
+  Award
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { ProductSelector } from "@/components/solucoes/ProductSelector";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
 import productsCollection from "@/assets/products-collection.jpg";
 
 const finishes = [
   {
-    icon: Sparkles,
     title: "Hot Stamping",
-    description: "Acabamento metalizado em ouro, prata ou cores especiais"
+    description: "Acabamento metalizado aplicado a quente, disponível em ouro, prata e cores especiais."
   },
   {
-    icon: Layers,
-    title: "Laminação",
-    description: "Proteção extra com acabamento fosco ou brilhante"
+    title: "Laminação Fosca",
+    description: "Camada protetora com toque aveludado e acabamento elegante."
   },
   {
-    icon: Printer,
+    title: "Laminação Brilhante",
+    description: "Acabamento com brilho intenso que realça cores e contrastes."
+  },
+  {
+    title: "Laminação Soft Touch",
+    description: "Laminação premium com toque macio e sensorial."
+  },
+  {
     title: "Impressão Offset",
-    description: "Alta definição com até 6 cores e tons especiais"
+    description: "Impressão de alta definição com fidelidade de cores e riqueza de detalhes."
   },
   {
-    icon: Box,
     title: "Relevo Seco",
-    description: "Textura sofisticada que destaca elementos da marca"
+    description: "Acabamento em alto ou baixo relevo sem uso de tinta."
+  },
+  {
+    title: "Relevo Combinado",
+    description: "Combinação de relevo com impressão ou hot stamping."
+  },
+  {
+    title: "Verniz Localizado",
+    description: "Aplicação de verniz em áreas específicas da embalagem."
+  },
+  {
+    title: "Verniz Total",
+    description: "Camada de verniz aplicada em toda a superfície."
+  },
+  {
+    title: "Corte Especial",
+    description: "Formato personalizado além do padrão tradicional."
+  },
+  {
+    title: "Alças Especiais",
+    description: "Variedade de opções como algodão, gorgurão, papel torcido, cetim e alças personalizadas."
   }
+];
+
+const quickLinks = [
+  { id: "produtos", label: "Produtos", icon: Package, href: "#produtos" },
+  { id: "acabamentos", label: "Acabamentos", icon: Sparkles, href: "#acabamentos" },
+  { id: "vantagens", label: "Vantagens Printbag", icon: Award, href: "#vantagens" }
 ];
 
 const advantages = [
@@ -83,13 +120,20 @@ export default function SolucoesPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
+                className="flex flex-wrap gap-4"
               >
-                <Button variant="cta" size="xl" asChild>
-                  <Link to="/contato?assunto=Fazer um orçamento">
-                    Solicite um Orçamento
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </Button>
+                {quickLinks.map((link, index) => (
+                  <a
+                    key={link.id}
+                    href={link.href}
+                    className="flex items-center gap-2 px-5 py-3 bg-card border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
+                  >
+                    <link.icon className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                      {link.label}
+                    </span>
+                  </a>
+                ))}
               </motion.div>
             </div>
 
@@ -112,10 +156,12 @@ export default function SolucoesPage() {
       </section>
 
       {/* Product Selection Section */}
-      <ProductSelector />
+      <section id="produtos">
+        <ProductSelector />
+      </section>
 
       {/* Finishes Section */}
-      <section className="py-20 md:py-28 bg-muted">
+      <section id="acabamentos" className="py-20 md:py-28 bg-muted">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,37 +176,56 @@ export default function SolucoesPage() {
               Diferenciais que Encantam
             </h2>
             <p className="text-lg text-muted-foreground">
-              Oferecemos diversos tipos de acabamentos para tornar sua embalagem única e memorável.
+              Diferenciais que transformam a embalagem em experiência de marca
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {finishes.map((finish, index) => (
-              <motion.div
-                key={finish.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-8 border border-border hover:border-primary/50 transition-colors group"
-              >
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <finish.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="text-xl font-heading font-semibold text-foreground mb-3">
-                  {finish.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {finish.description}
-                </p>
-              </motion.div>
-            ))}
+          <div className="px-12">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {finishes.map((finish, index) => (
+                  <CarouselItem key={finish.title} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <Card className="border-border hover:border-primary/50 transition-colors group h-full">
+                        <CardContent className="p-0">
+                          {/* Image placeholder */}
+                          <div className="aspect-[4/3] bg-muted-foreground/10 rounded-t-lg flex items-center justify-center">
+                            <Sparkles className="w-12 h-12 text-muted-foreground/30" />
+                          </div>
+                          <div className="p-6">
+                            <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                              {finish.title}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                              {finish.description}
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </div>
         </div>
       </section>
 
       {/* Advantages Section */}
-      <section className="py-20 md:py-28">
+      <section id="vantagens" className="py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
