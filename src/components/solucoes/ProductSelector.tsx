@@ -17,7 +17,9 @@ import {
   Pill,
   Store,
   Sparkles,
-  MoreHorizontal
+  MoreHorizontal,
+  Croissant,
+  Square
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SelectionCard } from "./SelectionCard";
@@ -66,7 +68,25 @@ import {
   tagMaterialOptions,
   tagPrintingOptions,
   tagFinishingOptions,
-  tagCordOptions
+  tagCordOptions,
+  // Saco options
+  sacoTypeOptions,
+  sacoMaterialOptions,
+  sacoBarrierOptions,
+  sacoPrintingOptions,
+  sacoApplicationOptions,
+  // Papel barreira options
+  papelBarreiraProtectionOptions,
+  papelBarreiraFormatOptions,
+  papelBarreiraPrintingOptions,
+  papelBarreiraApplicationOptions,
+  // Guardanapo options
+  guardanapoTypeOptions,
+  // Papel wrap options
+  papelWrapTypeOptions,
+  papelWrapFormatOptions,
+  papelWrapPrintingOptions,
+  papelWrapApplicationOptions
 } from "./ProductFlowData";
 
 // Segments definition
@@ -123,8 +143,9 @@ const segmentProducts: Record<string, { id: string; label: string; icon: React.C
     { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
     { id: "sacos", label: "Sacos", icon: Package },
     { id: "caixas", label: "Caixas", icon: Box },
-    { id: "guardanapos", label: "Guardanapos", icon: Scissors },
-    { id: "papel-barreira", label: "Papel Barreira", icon: Layers }
+    { id: "guardanapos", label: "Guardanapos", icon: Square },
+    { id: "papel-barreira", label: "Papel Barreira", icon: Layers },
+    { id: "papel-wrap", label: "Papel Wrap", icon: Croissant }
   ],
   farmacias: [
     { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
@@ -207,8 +228,19 @@ export function ProductSelector() {
       case "tags":
         setStep("tag-type");
         break;
+      case "sacos":
+        setStep("saco-type");
+        break;
+      case "papel-barreira":
+        setStep("papel-barreira-protection");
+        break;
+      case "guardanapos":
+        setStep("guardanapo-type");
+        break;
+      case "papel-wrap":
+        setStep("papel-wrap-type");
+        break;
       default:
-        // For other products (sacos, guardanapos, papel-barreira), go directly to confirmation
         setStep("confirmation");
     }
   }, []);
@@ -462,6 +494,88 @@ export function ProductSelector() {
   }, []);
 
   // ========================
+  // SACO HANDLERS
+  // ========================
+  const handleSacoTypeSelect = useCallback((typeId: string) => {
+    setSelection(prev => ({ ...prev, sacoType: typeId }));
+    setStep("saco-material");
+  }, []);
+
+  const handleSacoMaterialSelect = useCallback((materialId: string) => {
+    setSelection(prev => ({ ...prev, sacoMaterial: materialId }));
+    setStep("saco-barrier");
+  }, []);
+
+  const handleSacoBarrierSelect = useCallback((barrierId: string) => {
+    setSelection(prev => ({ ...prev, sacoBarrier: barrierId }));
+    setStep("saco-printing");
+  }, []);
+
+  const handleSacoPrintingSelect = useCallback((printingId: string) => {
+    setSelection(prev => ({ ...prev, sacoPrinting: printingId }));
+    setStep("saco-application");
+  }, []);
+
+  const handleSacoApplicationSelect = useCallback((applicationId: string) => {
+    setSelection(prev => ({ ...prev, sacoApplication: applicationId }));
+    setStep("confirmation");
+  }, []);
+
+  // ========================
+  // PAPEL BARREIRA HANDLERS
+  // ========================
+  const handlePapelBarreiraProtectionSelect = useCallback((protectionId: string) => {
+    setSelection(prev => ({ ...prev, papelBarreiraProtection: protectionId }));
+    setStep("papel-barreira-format");
+  }, []);
+
+  const handlePapelBarreiraFormatSelect = useCallback((formatId: string) => {
+    setSelection(prev => ({ ...prev, papelBarreiraFormat: formatId }));
+    setStep("papel-barreira-printing");
+  }, []);
+
+  const handlePapelBarreiraPrintingSelect = useCallback((printingId: string) => {
+    setSelection(prev => ({ ...prev, papelBarreiraPrinting: printingId }));
+    setStep("papel-barreira-application");
+  }, []);
+
+  const handlePapelBarreiraApplicationSelect = useCallback((applicationId: string) => {
+    setSelection(prev => ({ ...prev, papelBarreiraApplication: applicationId }));
+    setStep("confirmation");
+  }, []);
+
+  // ========================
+  // GUARDANAPO HANDLERS
+  // ========================
+  const handleGuardanapoTypeSelect = useCallback((typeId: string) => {
+    setSelection(prev => ({ ...prev, guardanapoType: typeId }));
+    setStep("confirmation");
+  }, []);
+
+  // ========================
+  // PAPEL WRAP HANDLERS
+  // ========================
+  const handlePapelWrapTypeSelect = useCallback((typeId: string) => {
+    setSelection(prev => ({ ...prev, papelWrapType: typeId }));
+    setStep("papel-wrap-format");
+  }, []);
+
+  const handlePapelWrapFormatSelect = useCallback((formatId: string) => {
+    setSelection(prev => ({ ...prev, papelWrapFormat: formatId }));
+    setStep("papel-wrap-printing");
+  }, []);
+
+  const handlePapelWrapPrintingSelect = useCallback((printingId: string) => {
+    setSelection(prev => ({ ...prev, papelWrapPrinting: printingId }));
+    setStep("papel-wrap-application");
+  }, []);
+
+  const handlePapelWrapApplicationSelect = useCallback((applicationId: string) => {
+    setSelection(prev => ({ ...prev, papelWrapApplication: applicationId }));
+    setStep("confirmation");
+  }, []);
+
+  // ========================
   // BUILD SUMMARY ITEMS
   // ========================
   const buildSummaryItems = useCallback(() => {
@@ -611,6 +725,60 @@ export function ProductSelector() {
       if (cordLabel) items.push({ label: "Cordão / Amarração", value: cordLabel });
     }
 
+    // Saco summary
+    if (selection.product === "sacos") {
+      const typeLabel = sacoTypeOptions.find(t => t.id === selection.sacoType)?.label;
+      if (typeLabel) items.push({ label: "Tipo de Saco", value: typeLabel });
+
+      const materialLabel = sacoMaterialOptions.find(m => m.id === selection.sacoMaterial)?.label;
+      if (materialLabel) items.push({ label: "Material", value: materialLabel });
+
+      const barrierLabel = sacoBarrierOptions.find(b => b.id === selection.sacoBarrier)?.label;
+      if (barrierLabel) items.push({ label: "Proteção / Barreira", value: barrierLabel });
+
+      const printingLabel = sacoPrintingOptions.find(p => p.id === selection.sacoPrinting)?.label;
+      if (printingLabel) items.push({ label: "Impressão", value: printingLabel });
+
+      const applicationLabel = sacoApplicationOptions.find(a => a.id === selection.sacoApplication)?.label;
+      if (applicationLabel) items.push({ label: "Aplicação", value: applicationLabel });
+    }
+
+    // Papel barreira summary
+    if (selection.product === "papel-barreira") {
+      const protectionLabel = papelBarreiraProtectionOptions.find(p => p.id === selection.papelBarreiraProtection)?.label;
+      if (protectionLabel) items.push({ label: "Tipo de Proteção", value: protectionLabel });
+
+      const formatLabel = papelBarreiraFormatOptions.find(f => f.id === selection.papelBarreiraFormat)?.label;
+      if (formatLabel) items.push({ label: "Formato", value: formatLabel });
+
+      const printingLabel = papelBarreiraPrintingOptions.find(p => p.id === selection.papelBarreiraPrinting)?.label;
+      if (printingLabel) items.push({ label: "Impressão", value: printingLabel });
+
+      const applicationLabel = papelBarreiraApplicationOptions.find(a => a.id === selection.papelBarreiraApplication)?.label;
+      if (applicationLabel) items.push({ label: "Aplicação", value: applicationLabel });
+    }
+
+    // Guardanapo summary
+    if (selection.product === "guardanapos") {
+      const typeLabel = guardanapoTypeOptions.find(t => t.id === selection.guardanapoType)?.label;
+      if (typeLabel) items.push({ label: "Tipo de Guardanapo", value: typeLabel });
+    }
+
+    // Papel wrap summary
+    if (selection.product === "papel-wrap") {
+      const typeLabel = papelWrapTypeOptions.find(t => t.id === selection.papelWrapType)?.label;
+      if (typeLabel) items.push({ label: "Tipo de Papel Wrap", value: typeLabel });
+
+      const formatLabel = papelWrapFormatOptions.find(f => f.id === selection.papelWrapFormat)?.label;
+      if (formatLabel) items.push({ label: "Formato", value: formatLabel });
+
+      const printingLabel = papelWrapPrintingOptions.find(p => p.id === selection.papelWrapPrinting)?.label;
+      if (printingLabel) items.push({ label: "Impressão", value: printingLabel });
+
+      const applicationLabel = papelWrapApplicationOptions.find(a => a.id === selection.papelWrapApplication)?.label;
+      if (applicationLabel) items.push({ label: "Aplicação", value: applicationLabel });
+    }
+
     return items;
   }, [selection, currentProducts]);
 
@@ -656,6 +824,10 @@ export function ProductSelector() {
     if (selection.product === "papel-seda") return Scissors;
     if (selection.product === "etiquetas") return Tag;
     if (selection.product === "tags") return Tag;
+    if (selection.product === "sacos") return Package;
+    if (selection.product === "papel-barreira") return Layers;
+    if (selection.product === "guardanapos") return Square;
+    if (selection.product === "papel-wrap") return Croissant;
     if (selection.segment) {
       return segments.find(s => s.id === selection.segment)?.icon || Package;
     }
@@ -1646,6 +1818,368 @@ export function ProductSelector() {
                   key={option.id}
                   label={option.label}
                   onClick={() => handleTagCordSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      // ========================
+      // SACO STEPS
+      // ========================
+      case "saco-type":
+        return (
+          <motion.div
+            key="saco-type"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Qual tipo de saco você precisa?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {sacoTypeOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handleSacoTypeSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "saco-material":
+        return (
+          <motion.div
+            key="saco-material"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Qual material do saco?
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
+              {sacoMaterialOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handleSacoMaterialSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "saco-barrier":
+        return (
+          <motion.div
+            key="saco-barrier"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              O produto precisa de proteção contra gordura ou umidade?
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {sacoBarrierOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handleSacoBarrierSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "saco-printing":
+        return (
+          <motion.div
+            key="saco-printing"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Deseja personalização?
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
+              {sacoPrintingOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handleSacoPrintingSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "saco-application":
+        return (
+          <motion.div
+            key="saco-application"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Para qual tipo de produto?
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {sacoApplicationOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handleSacoApplicationSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      // ========================
+      // PAPEL BARREIRA STEPS
+      // ========================
+      case "papel-barreira-protection":
+        return (
+          <motion.div
+            key="papel-barreira-protection"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Qual tipo de proteção você precisa?
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {papelBarreiraProtectionOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelBarreiraProtectionSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "papel-barreira-format":
+        return (
+          <motion.div
+            key="papel-barreira-format"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Qual formato você prefere?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {papelBarreiraFormatOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelBarreiraFormatSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "papel-barreira-printing":
+        return (
+          <motion.div
+            key="papel-barreira-printing"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Deseja personalização?
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
+              {papelBarreiraPrintingOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelBarreiraPrintingSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "papel-barreira-application":
+        return (
+          <motion.div
+            key="papel-barreira-application"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Onde será utilizado?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {papelBarreiraApplicationOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelBarreiraApplicationSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      // ========================
+      // GUARDANAPO STEPS
+      // ========================
+      case "guardanapo-type":
+        return (
+          <motion.div
+            key="guardanapo-type"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Qual tipo de guardanapo?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {guardanapoTypeOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handleGuardanapoTypeSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      // ========================
+      // PAPEL WRAP STEPS
+      // ========================
+      case "papel-wrap-type":
+        return (
+          <motion.div
+            key="papel-wrap-type"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Qual tipo de papel wrap?
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {papelWrapTypeOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelWrapTypeSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "papel-wrap-format":
+        return (
+          <motion.div
+            key="papel-wrap-format"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Como será utilizado?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {papelWrapFormatOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelWrapFormatSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "papel-wrap-printing":
+        return (
+          <motion.div
+            key="papel-wrap-printing"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Deseja personalização?
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
+              {papelWrapPrintingOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelWrapPrintingSelect(option.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "papel-wrap-application":
+        return (
+          <motion.div
+            key="papel-wrap-application"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-heading font-semibold text-foreground">
+              Para qual tipo de alimento?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {papelWrapApplicationOptions.map((option, index) => (
+                <SelectionCard
+                  key={option.id}
+                  label={option.label}
+                  onClick={() => handlePapelWrapApplicationSelect(option.id)}
                   index={index}
                 />
               ))}

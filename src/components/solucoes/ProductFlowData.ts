@@ -294,6 +294,120 @@ export const tagCordOptions = [
   { id: "fita", label: "Fita" }
 ];
 
+// ========================
+// SACO OPTIONS
+// ========================
+
+// Saco type options
+export const sacoTypeOptions = [
+  { id: "fundo-quadrado", label: "Saco fundo quadrado" },
+  { id: "fundo-v", label: "Saco fundo V" }
+];
+
+// Saco material options
+export const sacoMaterialOptions = [
+  { id: "kraft-natural", label: "Papel kraft natural" },
+  { id: "branco", label: "Papel branco" },
+  { id: "outro", label: "Outro" }
+];
+
+// Saco barrier options
+export const sacoBarrierOptions = [
+  { id: "nao", label: "Não" },
+  { id: "gordura", label: "Sim – resistência à gordura" },
+  { id: "gordura-umidade", label: "Sim – resistência à gordura e umidade" }
+];
+
+// Saco printing options
+export const sacoPrintingOptions = [
+  { id: "sem-impressao", label: "Sem impressão" },
+  { id: "1-cor", label: "Impressão 1 cor" },
+  { id: "multicores", label: "Impressão multicores" }
+];
+
+// Saco application options
+export const sacoApplicationOptions = [
+  { id: "paes", label: "Pães" },
+  { id: "lanches", label: "Lanches" },
+  { id: "doces", label: "Doces" },
+  { id: "farmacia", label: "Produtos de farmácia" },
+  { id: "outros-alimentos", label: "Outros alimentos" }
+];
+
+// ========================
+// PAPEL BARREIRA OPTIONS
+// ========================
+
+// Papel barreira protection type options
+export const papelBarreiraProtectionOptions = [
+  { id: "gordura", label: "Contra gordura" },
+  { id: "gordura-umidade", label: "Contra gordura e umidade" },
+  { id: "contato-alimento", label: "Contato direto com alimento" }
+];
+
+// Papel barreira format options
+export const papelBarreiraFormatOptions = [
+  { id: "folhas", label: "Folhas" },
+  { id: "bobina", label: "Bobina" }
+];
+
+// Papel barreira printing options
+export const papelBarreiraPrintingOptions = [
+  { id: "sem-impressao", label: "Sem impressão" },
+  { id: "1-cor", label: "Impressão 1 cor" },
+  { id: "multicores", label: "Impressão multicores" }
+];
+
+// Papel barreira application options
+export const papelBarreiraApplicationOptions = [
+  { id: "hamburguer", label: "Hambúrguer" },
+  { id: "lanches", label: "Lanches" },
+  { id: "alimentos-geral", label: "Alimentos em geral" },
+  { id: "restaurante", label: "Restaurante" }
+];
+
+// ========================
+// GUARDANAPO OPTIONS
+// ========================
+
+// Guardanapo type options
+export const guardanapoTypeOptions = [
+  { id: "simples", label: "Guardanapo simples" },
+  { id: "personalizado", label: "Guardanapo personalizado" }
+];
+
+// ========================
+// PAPEL WRAP OPTIONS
+// ========================
+
+// Papel wrap type options
+export const papelWrapTypeOptions = [
+  { id: "sem-barreira", label: "Sem barreira" },
+  { id: "barreira-gordura", label: "Com barreira contra gordura" },
+  { id: "barreira-gordura-umidade", label: "Com barreira contra gordura e umidade" }
+];
+
+// Papel wrap format options
+export const papelWrapFormatOptions = [
+  { id: "folhas", label: "Folhas individuais" },
+  { id: "bobina", label: "Bobina" }
+];
+
+// Papel wrap printing options
+export const papelWrapPrintingOptions = [
+  { id: "sem-impressao", label: "Sem impressão" },
+  { id: "1-cor", label: "Impressão 1 cor" },
+  { id: "multicores", label: "Impressão multicores" }
+];
+
+// Papel wrap application options
+export const papelWrapApplicationOptions = [
+  { id: "hamburguer", label: "Hambúrguer" },
+  { id: "sanduiches", label: "Sanduíches" },
+  { id: "porcoes", label: "Porções" },
+  { id: "doces", label: "Doces" }
+];
+
 // Flow step definitions
 export type FlowStep = 
   | "segment"
@@ -338,6 +452,24 @@ export type FlowStep =
   | "tag-printing"
   | "tag-finishing"
   | "tag-cord"
+  // Saco steps
+  | "saco-type"
+  | "saco-material"
+  | "saco-barrier"
+  | "saco-printing"
+  | "saco-application"
+  // Papel barreira steps
+  | "papel-barreira-protection"
+  | "papel-barreira-format"
+  | "papel-barreira-printing"
+  | "papel-barreira-application"
+  // Guardanapo steps
+  | "guardanapo-type"
+  // Papel wrap steps
+  | "papel-wrap-type"
+  | "papel-wrap-format"
+  | "papel-wrap-printing"
+  | "papel-wrap-application"
   // Final step
   | "confirmation";
 
@@ -378,6 +510,24 @@ export interface SelectionState {
   tagPrinting: string | null;
   tagFinishing: string[];
   tagCord: string | null;
+  // Saco selections
+  sacoType: string | null;
+  sacoMaterial: string | null;
+  sacoBarrier: string | null;
+  sacoPrinting: string | null;
+  sacoApplication: string | null;
+  // Papel barreira selections
+  papelBarreiraProtection: string | null;
+  papelBarreiraFormat: string | null;
+  papelBarreiraPrinting: string | null;
+  papelBarreiraApplication: string | null;
+  // Guardanapo selections
+  guardanapoType: string | null;
+  // Papel wrap selections
+  papelWrapType: string | null;
+  papelWrapFormat: string | null;
+  papelWrapPrinting: string | null;
+  papelWrapApplication: string | null;
 }
 
 export const initialSelectionState: SelectionState = {
@@ -416,5 +566,23 @@ export const initialSelectionState: SelectionState = {
   tagMaterial: null,
   tagPrinting: null,
   tagFinishing: [],
-  tagCord: null
+  tagCord: null,
+  // Saco
+  sacoType: null,
+  sacoMaterial: null,
+  sacoBarrier: null,
+  sacoPrinting: null,
+  sacoApplication: null,
+  // Papel barreira
+  papelBarreiraProtection: null,
+  papelBarreiraFormat: null,
+  papelBarreiraPrinting: null,
+  papelBarreiraApplication: null,
+  // Guardanapo
+  guardanapoType: null,
+  // Papel wrap
+  papelWrapType: null,
+  papelWrapFormat: null,
+  papelWrapPrinting: null,
+  papelWrapApplication: null
 };
