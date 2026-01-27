@@ -12,13 +12,21 @@ const navItems = [
     name: "Soluções", 
     path: "/solucoes",
     submenu: [
-      { name: "Produtos", path: "/solucoes#produtos" },
+      { name: "Embalagens", path: "/solucoes#produtos" },
       { name: "Acabamentos", path: "/solucoes#acabamentos" },
       { name: "Vantagens Printbag", path: "/solucoes#vantagens" },
     ]
   },
   { name: "Loja", path: "https://loja.printbag.com.br/", external: true },
-  { name: "Sustentabilidade", path: "/sustentabilidade" },
+  { 
+    name: "ESG", 
+    path: "/sustentabilidade",
+    submenu: [
+      { name: "Sustentabilidade", path: "/sustentabilidade" },
+      { name: "Privacidade", path: "/privacidade" },
+      { name: "Trabalhe Conosco", path: "/trabalhe-conosco" },
+    ]
+  },
   { name: "Contato", path: "/contato" },
 ];
 
