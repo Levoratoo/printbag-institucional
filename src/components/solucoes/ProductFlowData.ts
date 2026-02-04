@@ -24,41 +24,43 @@ export const bagTypeOptions = [
   }
 ];
 
-// Paper type options for bags without finishing
+// Paper type options for bags without finishing (with descriptions)
 export const bagPaperOptionsSimple = [
-  { id: "kraft", label: "Kraft" },
-  { id: "branco", label: "Branco" }
+  { id: "kraft", label: "Kraft", description: "Papel resistente com visual natural e rústico." },
+  { id: "branco", label: "Branco", description: "Acabamento limpo, ideal para impressão de alta qualidade." }
 ];
 
-// Paper type options for premium bags
+// Paper type options for premium bags (with descriptions)
 export const bagPaperOptionsPremium = [
-  { id: "kraft", label: "Kraft" },
-  { id: "branco", label: "Branco" },
-  { id: "especial", label: "Especial" }
+  { id: "kraft", label: "Kraft", description: "Papel resistente com visual natural e rústico." },
+  { id: "branco", label: "Branco", description: "Acabamento limpo, ideal para impressão de alta qualidade." },
+  { id: "cartao", label: "Cartão", description: "Papel encorpado e sofisticado, ideal para acabamentos premium." }
 ];
 
-// Handle type options for simple bags
+// Handle type options for simple bags (with descriptions)
 export const bagHandleOptionsSimple = [
-  { id: "papel-torcido", label: "Papel torcido" },
-  { id: "cordao", label: "Cordão" },
-  { id: "fita", label: "Fita" },
-  { id: "flat", label: "Flat" }
+  { id: "papel-torcido", label: "Papel torcido", description: "Econômica e funcional, ideal para alto volume." },
+  { id: "cordao", label: "Cordão", description: "Elegante e resistente, agrega valor à embalagem." },
+  { id: "fita", label: "Fita", description: "Sofisticada e delicada, perfeita para presentes." },
+  { id: "flat", label: "Flat", description: "Visual moderno e minimalista." }
 ];
 
-// Handle type options for premium bags
+// Handle type options for premium bags (with descriptions)
 export const bagHandleOptionsPremium = [
-  { id: "cordao", label: "Cordão" },
-  { id: "fita", label: "Fita" },
-  { id: "papel", label: "Papel" },
-  { id: "flat", label: "Flat" }
+  { id: "cordao", label: "Cordão", description: "Elegante e resistente, agrega valor à embalagem." },
+  { id: "fita", label: "Fita", description: "Sofisticada e delicada, perfeita para presentes." },
+  { id: "papel", label: "Papel", description: "Acabamento uniforme e econômico." },
+  { id: "flat", label: "Flat", description: "Visual moderno e minimalista." }
 ];
 
-// Finishing options for premium bags (multi-select)
+// Finishing options for premium bags (multi-select) (with descriptions)
 export const bagFinishingOptions = [
-  { id: "hot-stamping", label: "Hot stamping" },
-  { id: "relevo", label: "Relevo" },
-  { id: "laminacao", label: "Laminação" },
-  { id: "verniz-localizado", label: "Verniz localizado" }
+  { id: "hot-stamping", label: "Hot stamping", description: "Aplicação metalizada que destaca a marca com brilho e sofisticação." },
+  { id: "relevo", label: "Relevo", description: "Textura tátil que valoriza o design e cria efeito tridimensional." },
+  { id: "laminacao", label: "Laminação", description: "Proteção extra com acabamento fosco ou brilhante." },
+  { id: "verniz-localizado", label: "Verniz localizado", description: "Destaque seletivo com brilho em áreas específicas." },
+  { id: "gofragem", label: "Gofragem", description: "Textura em alto relevo que cria padrões elegantes na superfície." },
+  { id: "impressao-metalizada", label: "Impressão Metálizada", description: "Efeito metalizado direto na impressão para um visual premium." }
 ];
 
 // Box type options
@@ -80,7 +82,7 @@ export const boxStructureOptionsSimple = [
   { id: "automontavel", label: "Caixa automontável" },
   { id: "tampa-solta", label: "Caixa com tampa (tampa solta)" },
   { id: "gaveta", label: "Caixa tipo gaveta" },
-  { id: "padrao", label: "Caixa padrão (colagem simples)" }
+  { id: "almofada", label: "Caixa almofada" }
 ];
 
 // Box structure options for premium boxes
@@ -92,13 +94,13 @@ export const boxStructureOptionsPremium = [
 // Paper options for simple boxes
 export const boxPaperOptionsSimple = [
   { id: "kraft", label: "Kraft" },
-  { id: "branco", label: "Branco" },
+  { id: "cartao", label: "Cartão" },
   { id: "outro", label: "Outro" }
 ];
 
 // Paper options for premium boxes
 export const boxPaperOptionsPremium = [
-  { id: "couche", label: "Couchê" },
+  { id: "kraft", label: "Kraft" },
   { id: "triplex", label: "Cartão triplex" },
   { id: "especial", label: "Papel especial" }
 ];
@@ -106,8 +108,7 @@ export const boxPaperOptionsPremium = [
 // Printing options for simple boxes
 export const boxPrintingOptions = [
   { id: "sem-impressao", label: "Sem impressão" },
-  { id: "simples", label: "Impressão simples (1 cor)" },
-  { id: "offset", label: "Impressão offset" }
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
 // Finishing options for premium boxes (multi-select)
@@ -115,14 +116,18 @@ export const boxFinishingOptions = [
   { id: "hot-stamping", label: "Hot stamping" },
   { id: "relevo", label: "Relevo" },
   { id: "verniz-localizado", label: "Verniz localizado" },
-  { id: "laminacao", label: "Laminação fosca ou brilho" }
+  { id: "laminacao", label: "Laminação fosca ou brilho" },
+  { id: "velcro", label: "Velcro" },
+  { id: "elastico", label: "Elástico" }
 ];
 
 // Extra options for premium boxes (multi-select)
 export const boxExtraOptions = [
   { id: "berco-interno", label: "Berço interno" },
   { id: "papel-seda", label: "Papel de seda interno" },
-  { id: "enchimento", label: "Enchimento / proteção" }
+  { id: "alca", label: "Alça" },
+  { id: "laco", label: "Laço" },
+  { id: "fita", label: "Fita" }
 ];
 
 // ========================
@@ -146,9 +151,7 @@ export const envelopeTypeOptions = [
 // Envelope format options for simple envelopes
 export const envelopeFormatOptionsSimple = [
   { id: "tradicional", label: "Envelope tradicional" },
-  { id: "com-aba", label: "Envelope com aba" },
-  { id: "com-visor", label: "Envelope com visor" },
-  { id: "tipo-pasta", label: "Envelope tipo pasta" }
+  { id: "fundo-quadrado", label: "Envelope fundo quadrado" }
 ];
 
 // Envelope format options for premium envelopes
@@ -158,11 +161,10 @@ export const envelopeFormatOptionsPremium = [
   { id: "fechamento-especial", label: "Envelope com fechamento especial" }
 ];
 
-// Paper options for simple envelopes
+// Paper options for simple envelopes (same as simple bags)
 export const envelopePaperOptionsSimple = [
   { id: "kraft", label: "Kraft" },
-  { id: "branco", label: "Branco" },
-  { id: "outro", label: "Outro" }
+  { id: "branco", label: "Branco" }
 ];
 
 // Paper options for premium envelopes
@@ -175,16 +177,17 @@ export const envelopePaperOptionsPremium = [
 // Printing options for simple envelopes
 export const envelopePrintingOptions = [
   { id: "sem-impressao", label: "Sem impressão" },
-  { id: "simples", label: "Impressão simples (1 cor)" },
-  { id: "offset", label: "Impressão offset" }
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
-// Finishing options for premium envelopes (multi-select)
+// Finishing options for premium envelopes (same as bags)
 export const envelopeFinishingOptions = [
-  { id: "hot-stamping", label: "Hot stamping" },
-  { id: "relevo", label: "Relevo" },
-  { id: "verniz-localizado", label: "Verniz localizado" },
-  { id: "laminacao", label: "Laminação fosca ou brilho" }
+  { id: "hot-stamping", label: "Hot stamping", description: "Aplicação metalizada que destaca a marca com brilho e sofisticação." },
+  { id: "relevo", label: "Relevo", description: "Textura tátil que valoriza o design e cria efeito tridimensional." },
+  { id: "laminacao", label: "Laminação", description: "Proteção extra com acabamento fosco ou brilhante." },
+  { id: "verniz-localizado", label: "Verniz localizado", description: "Destaque seletivo com brilho em áreas específicas." },
+  { id: "gofragem", label: "Gofragem", description: "Textura em alto relevo que cria padrões elegantes na superfície." },
+  { id: "impressao-metalizada", label: "Impressão Metálizada", description: "Efeito metalizado direto na impressão para um visual premium." }
 ];
 
 // Closure options for premium envelopes
@@ -208,8 +211,7 @@ export const papelSedaTypeOptions = [
 // Papel de seda printing options
 export const papelSedaPrintingOptions = [
   { id: "sem-impressao", label: "Sem impressão" },
-  { id: "1-cor", label: "Impressão 1 cor" },
-  { id: "multicores", label: "Impressão multicores" }
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
 // Papel de seda application options
@@ -223,9 +225,8 @@ export const papelSedaApplicationOptions = [
 // ETIQUETA OPTIONS
 // ========================
 
-// Etiqueta type options
+// Etiqueta type options (removed adesiva)
 export const etiquetaTypeOptions = [
-  { id: "adesiva", label: "Etiqueta adesiva" },
   { id: "amarracao", label: "Etiqueta para amarração" },
   { id: "promocional", label: "Etiqueta promocional" },
   { id: "informativa", label: "Etiqueta informativa" }
@@ -240,12 +241,19 @@ export const etiquetaMaterialOptions = [
 
 // Etiqueta printing options
 export const etiquetaPrintingOptions = [
-  { id: "1-cor", label: "1 cor" },
-  { id: "multicor", label: "Multicor" },
-  { id: "sem-impressao", label: "Sem impressão" }
+  { id: "sem-impressao", label: "Sem impressão" },
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
-// Etiqueta finishing options (multi-select)
+// Etiqueta finishing options for couche material (multi-select)
+export const etiquetaFinishingOptionsCouche = [
+  { id: "verniz", label: "Verniz" },
+  { id: "laminacao", label: "Laminação" },
+  { id: "corte-especial", label: "Corte especial" },
+  { id: "hot-stamping", label: "Hot stamping" }
+];
+
+// Etiqueta finishing options for other materials (multi-select)
 export const etiquetaFinishingOptions = [
   { id: "verniz", label: "Verniz" },
   { id: "laminacao", label: "Laminação" },
@@ -273,8 +281,8 @@ export const tagMaterialOptions = [
 
 // Tag printing options
 export const tagPrintingOptions = [
-  { id: "1-cor", label: "1 cor" },
-  { id: "multicor", label: "Multicor" }
+  { id: "sem-impressao", label: "Sem impressão" },
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
 // Tag finishing options (multi-select)
@@ -304,11 +312,17 @@ export const sacoTypeOptions = [
   { id: "fundo-v", label: "Saco fundo V" }
 ];
 
-// Saco material options
+// Saco material options (standard)
 export const sacoMaterialOptions = [
   { id: "kraft-natural", label: "Papel kraft natural" },
   { id: "branco", label: "Papel branco" },
   { id: "outro", label: "Outro" }
+];
+
+// Saco material options for Food Service
+export const sacoMaterialOptionsFoodService = [
+  { id: "branco", label: "Papel Branco" },
+  { id: "pardo", label: "Papel Pardo" }
 ];
 
 // Saco barrier options
@@ -321,8 +335,7 @@ export const sacoBarrierOptions = [
 // Saco printing options
 export const sacoPrintingOptions = [
   { id: "sem-impressao", label: "Sem impressão" },
-  { id: "1-cor", label: "Impressão 1 cor" },
-  { id: "multicores", label: "Impressão multicores" }
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
 // Saco application options
@@ -354,8 +367,7 @@ export const papelBarreiraFormatOptions = [
 // Papel barreira printing options
 export const papelBarreiraPrintingOptions = [
   { id: "sem-impressao", label: "Sem impressão" },
-  { id: "1-cor", label: "Impressão 1 cor" },
-  { id: "multicores", label: "Impressão multicores" }
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
 // Papel barreira application options
@@ -396,8 +408,7 @@ export const papelWrapFormatOptions = [
 // Papel wrap printing options
 export const papelWrapPrintingOptions = [
   { id: "sem-impressao", label: "Sem impressão" },
-  { id: "1-cor", label: "Impressão 1 cor" },
-  { id: "multicores", label: "Impressão multicores" }
+  { id: "com-impressao", label: "Com impressão" }
 ];
 
 // Papel wrap application options

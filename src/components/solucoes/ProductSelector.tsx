@@ -17,7 +17,7 @@ import {
   Pill,
   Store,
   Sparkles,
-  MoreHorizontal,
+  Truck,
   Croissant,
   Square
 } from "lucide-react";
@@ -63,6 +63,7 @@ import {
   etiquetaMaterialOptions,
   etiquetaPrintingOptions,
   etiquetaFinishingOptions,
+  etiquetaFinishingOptionsCouche,
   // Tag options
   tagTypeOptions,
   tagMaterialOptions,
@@ -72,6 +73,7 @@ import {
   // Saco options
   sacoTypeOptions,
   sacoMaterialOptions,
+  sacoMaterialOptionsFoodService,
   sacoBarrierOptions,
   sacoPrintingOptions,
   sacoApplicationOptions,
@@ -99,7 +101,7 @@ const segments = [
   { id: "food-service", label: "Food Service", icon: Utensils },
   { id: "farmacias", label: "Farmácias", icon: Pill },
   { id: "supermercados", label: "Supermercados", icon: Store },
-  { id: "outros", label: "Outros", icon: MoreHorizontal }
+  { id: "atacado-distribuidores", label: "Atacado/Distribuidores", icon: Truck }
 ];
 
 // Products by segment
@@ -157,15 +159,13 @@ const segmentProducts: Record<string, { id: string; label: string; icon: React.C
     { id: "sacos", label: "Sacos", icon: Package },
     { id: "caixas", label: "Caixas", icon: Box }
   ],
-  outros: [
+  "atacado-distribuidores": [
     { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "sacos", label: "Sacos", icon: Package },
     { id: "caixas", label: "Caixas", icon: Box },
     { id: "envelopes", label: "Envelopes", icon: FileText },
     { id: "etiquetas", label: "Etiquetas", icon: Tag },
-    { id: "papel-seda", label: "Papel de Seda", icon: Scissors },
-    { id: "papel-barreira", label: "Papel Barreira", icon: Layers },
-    { id: "tags", label: "Tags", icon: Tag }
+    { id: "tags", label: "Tags", icon: Tag },
+    { id: "papel-seda", label: "Papel de Seda", icon: Scissors }
   ]
 };
 
@@ -176,27 +176,378 @@ export function ProductSelector() {
 
   const currentProducts = selection.segment ? segmentProducts[selection.segment] || [] : [];
 
-  // Reset all selections
-  const handleReset = useCallback(() => {
+  // Helper to check if in food-service segment
+  const isFoodService = selection.segment === "food-service";
+
+  // Reset functions for navigation
+  const handleBackToSegment = useCallback(() => {
     setSelection(initialSelectionState);
     setStep("segment");
   }, []);
 
-  // Go back to segment selection
-  const handleBackToSegment = useCallback(() => {
-    setSelection({
-      ...initialSelectionState,
-    });
-    setStep("segment");
-  }, []);
-
-  // Go back to product selection
   const handleBackToProduct = useCallback(() => {
     setSelection(prev => ({
       ...initialSelectionState,
       segment: prev.segment
     }));
     setStep("product");
+  }, []);
+
+  // Back to bag type
+  const handleBackToBagType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("bag-type");
+  }, []);
+
+  // Back to bag finishing
+  const handleBackToBagFinishing = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      bagType: prev.bagType
+    }));
+    setStep("bag-finishing");
+  }, []);
+
+  // Back to bag paper
+  const handleBackToBagPaper = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      bagType: prev.bagType,
+      bagFinishing: prev.bagFinishing
+    }));
+    if (selection.bagType === "enobrecidas") {
+      setStep("bag-paper-premium");
+    } else {
+      setStep("bag-paper-simple");
+    }
+  }, [selection.bagType]);
+
+  // Back to box type
+  const handleBackToBoxType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("box-type");
+  }, []);
+
+  // Back to box structure
+  const handleBackToBoxStructure = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      boxType: prev.boxType
+    }));
+    if (selection.boxType === "enobrecidas") {
+      setStep("box-structure-premium");
+    } else {
+      setStep("box-structure-simple");
+    }
+  }, [selection.boxType]);
+
+  // Back to box paper
+  const handleBackToBoxPaper = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      boxType: prev.boxType,
+      boxStructure: prev.boxStructure
+    }));
+    if (selection.boxType === "enobrecidas") {
+      setStep("box-paper-premium");
+    } else {
+      setStep("box-paper-simple");
+    }
+  }, [selection.boxType]);
+
+  // Back to box finishing
+  const handleBackToBoxFinishing = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      boxType: prev.boxType,
+      boxStructure: prev.boxStructure,
+      boxPaper: prev.boxPaper
+    }));
+    setStep("box-finishing");
+  }, []);
+
+  // Back to envelope type
+  const handleBackToEnvelopeType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("envelope-type");
+  }, []);
+
+  // Back to envelope format
+  const handleBackToEnvelopeFormat = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      envelopeType: prev.envelopeType
+    }));
+    if (selection.envelopeType === "enobrecido") {
+      setStep("envelope-format-premium");
+    } else {
+      setStep("envelope-format-simple");
+    }
+  }, [selection.envelopeType]);
+
+  // Back to envelope paper
+  const handleBackToEnvelopePaper = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      envelopeType: prev.envelopeType,
+      envelopeFormat: prev.envelopeFormat
+    }));
+    if (selection.envelopeType === "enobrecido") {
+      setStep("envelope-paper-premium");
+    } else {
+      setStep("envelope-paper-simple");
+    }
+  }, [selection.envelopeType]);
+
+  // Back to envelope finishing
+  const handleBackToEnvelopeFinishing = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      envelopeType: prev.envelopeType,
+      envelopeFormat: prev.envelopeFormat,
+      envelopePaper: prev.envelopePaper
+    }));
+    setStep("envelope-finishing");
+  }, []);
+
+  // Back to etiqueta type
+  const handleBackToEtiquetaType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("etiqueta-type");
+  }, []);
+
+  // Back to etiqueta material
+  const handleBackToEtiquetaMaterial = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      etiquetaType: prev.etiquetaType
+    }));
+    setStep("etiqueta-material");
+  }, []);
+
+  // Back to etiqueta printing
+  const handleBackToEtiquetaPrinting = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      etiquetaType: prev.etiquetaType,
+      etiquetaMaterial: prev.etiquetaMaterial
+    }));
+    setStep("etiqueta-printing");
+  }, []);
+
+  // Back to tag type
+  const handleBackToTagType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("tag-type");
+  }, []);
+
+  // Back to tag material
+  const handleBackToTagMaterial = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      tagType: prev.tagType
+    }));
+    setStep("tag-material");
+  }, []);
+
+  // Back to tag printing
+  const handleBackToTagPrinting = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      tagType: prev.tagType,
+      tagMaterial: prev.tagMaterial
+    }));
+    setStep("tag-printing");
+  }, []);
+
+  // Back to tag finishing
+  const handleBackToTagFinishing = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      tagType: prev.tagType,
+      tagMaterial: prev.tagMaterial,
+      tagPrinting: prev.tagPrinting
+    }));
+    setStep("tag-finishing");
+  }, []);
+
+  // Back to saco type
+  const handleBackToSacoType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("saco-type");
+  }, []);
+
+  // Back to saco material
+  const handleBackToSacoMaterial = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      sacoType: prev.sacoType
+    }));
+    setStep("saco-material");
+  }, []);
+
+  // Back to saco barrier
+  const handleBackToSacoBarrier = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      sacoType: prev.sacoType,
+      sacoMaterial: prev.sacoMaterial
+    }));
+    setStep("saco-barrier");
+  }, []);
+
+  // Back to saco printing
+  const handleBackToSacoPrinting = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      sacoType: prev.sacoType,
+      sacoMaterial: prev.sacoMaterial,
+      sacoBarrier: prev.sacoBarrier
+    }));
+    setStep("saco-printing");
+  }, []);
+
+  // Back to papel seda type
+  const handleBackToPapelSedaType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("papel-seda-type");
+  }, []);
+
+  // Back to papel seda printing
+  const handleBackToPapelSedaPrinting = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      papelSedaType: prev.papelSedaType
+    }));
+    setStep("papel-seda-printing");
+  }, []);
+
+  // Back to papel barreira protection
+  const handleBackToPapelBarreiraProtection = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("papel-barreira-protection");
+  }, []);
+
+  // Back to papel barreira format
+  const handleBackToPapelBarreiraFormat = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      papelBarreiraProtection: prev.papelBarreiraProtection
+    }));
+    setStep("papel-barreira-format");
+  }, []);
+
+  // Back to papel barreira printing
+  const handleBackToPapelBarreiraPrinting = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      papelBarreiraProtection: prev.papelBarreiraProtection,
+      papelBarreiraFormat: prev.papelBarreiraFormat
+    }));
+    setStep("papel-barreira-printing");
+  }, []);
+
+  // Back to papel wrap type
+  const handleBackToPapelWrapType = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product
+    }));
+    setStep("papel-wrap-type");
+  }, []);
+
+  // Back to papel wrap format
+  const handleBackToPapelWrapFormat = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      papelWrapType: prev.papelWrapType
+    }));
+    setStep("papel-wrap-format");
+  }, []);
+
+  // Back to papel wrap printing
+  const handleBackToPapelWrapPrinting = useCallback(() => {
+    setSelection(prev => ({
+      ...initialSelectionState,
+      segment: prev.segment,
+      product: prev.product,
+      papelWrapType: prev.papelWrapType,
+      papelWrapFormat: prev.papelWrapFormat
+    }));
+    setStep("papel-wrap-printing");
   }, []);
 
   // Handle segment selection
@@ -441,8 +792,13 @@ export function ProductSelector() {
 
   const handleEtiquetaPrintingSelect = useCallback((printingId: string) => {
     setSelection(prev => ({ ...prev, etiquetaPrinting: printingId }));
-    setStep("etiqueta-finishing");
-  }, []);
+    // Only show finishing for couche material
+    if (selection.etiquetaMaterial === "couche") {
+      setStep("etiqueta-finishing");
+    } else {
+      setStep("confirmation");
+    }
+  }, [selection.etiquetaMaterial]);
 
   const handleEtiquetaFinishingToggle = useCallback((finishId: string) => {
     setSelection(prev => ({
@@ -503,8 +859,13 @@ export function ProductSelector() {
 
   const handleSacoMaterialSelect = useCallback((materialId: string) => {
     setSelection(prev => ({ ...prev, sacoMaterial: materialId }));
-    setStep("saco-barrier");
-  }, []);
+    // For food-service, skip barrier and go to printing
+    if (isFoodService) {
+      setStep("saco-printing");
+    } else {
+      setStep("saco-barrier");
+    }
+  }, [isFoodService]);
 
   const handleSacoBarrierSelect = useCallback((barrierId: string) => {
     setSelection(prev => ({ ...prev, sacoBarrier: barrierId }));
@@ -513,8 +874,13 @@ export function ProductSelector() {
 
   const handleSacoPrintingSelect = useCallback((printingId: string) => {
     setSelection(prev => ({ ...prev, sacoPrinting: printingId }));
-    setStep("saco-application");
-  }, []);
+    // For food-service, go directly to confirmation
+    if (isFoodService) {
+      setStep("confirmation");
+    } else {
+      setStep("saco-application");
+    }
+  }, [isFoodService]);
 
   const handleSacoApplicationSelect = useCallback((applicationId: string) => {
     setSelection(prev => ({ ...prev, sacoApplication: applicationId }));
@@ -697,7 +1063,7 @@ export function ProductSelector() {
 
       if (selection.etiquetaFinishing.length > 0) {
         const finishingLabels = selection.etiquetaFinishing.map(f => 
-          etiquetaFinishingOptions.find(opt => opt.id === f)?.label || f
+          etiquetaFinishingOptionsCouche.find(opt => opt.id === f)?.label || f
         );
         items.push({ label: "Acabamentos", value: finishingLabels });
       }
@@ -730,17 +1096,22 @@ export function ProductSelector() {
       const typeLabel = sacoTypeOptions.find(t => t.id === selection.sacoType)?.label;
       if (typeLabel) items.push({ label: "Tipo de Saco", value: typeLabel });
 
-      const materialLabel = sacoMaterialOptions.find(m => m.id === selection.sacoMaterial)?.label;
+      const materialOptions = isFoodService ? sacoMaterialOptionsFoodService : sacoMaterialOptions;
+      const materialLabel = materialOptions.find(m => m.id === selection.sacoMaterial)?.label;
       if (materialLabel) items.push({ label: "Material", value: materialLabel });
 
-      const barrierLabel = sacoBarrierOptions.find(b => b.id === selection.sacoBarrier)?.label;
-      if (barrierLabel) items.push({ label: "Proteção / Barreira", value: barrierLabel });
+      if (!isFoodService) {
+        const barrierLabel = sacoBarrierOptions.find(b => b.id === selection.sacoBarrier)?.label;
+        if (barrierLabel) items.push({ label: "Proteção / Barreira", value: barrierLabel });
+      }
 
       const printingLabel = sacoPrintingOptions.find(p => p.id === selection.sacoPrinting)?.label;
       if (printingLabel) items.push({ label: "Impressão", value: printingLabel });
 
-      const applicationLabel = sacoApplicationOptions.find(a => a.id === selection.sacoApplication)?.label;
-      if (applicationLabel) items.push({ label: "Aplicação", value: applicationLabel });
+      if (!isFoodService) {
+        const applicationLabel = sacoApplicationOptions.find(a => a.id === selection.sacoApplication)?.label;
+        if (applicationLabel) items.push({ label: "Aplicação", value: applicationLabel });
+      }
     }
 
     // Papel barreira summary
@@ -780,7 +1151,7 @@ export function ProductSelector() {
     }
 
     return items;
-  }, [selection, currentProducts]);
+  }, [selection, currentProducts, isFoodService]);
 
   // Submit to contact page
   const handleSubmit = useCallback(() => {
@@ -793,28 +1164,445 @@ export function ProductSelector() {
     navigate(`/contato?assunto=Fazer um orçamento&mensagem=${encodeURIComponent(mensagem)}`);
   }, [buildSummaryItems, navigate]);
 
-  // Build breadcrumb items
+  // ========================
+  // BUILD ENHANCED BREADCRUMB ITEMS
+  // ========================
   const buildBreadcrumbItems = useCallback(() => {
     const items: { label: string; onClick?: () => void; isCurrent?: boolean }[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const currentStep = step as any;
     
+    // Always start with Segmentos
     items.push({ label: "Segmentos", onClick: handleBackToSegment });
 
+    // Add segment if selected
     if (selection.segment) {
       const segmentLabel = segments.find(s => s.id === selection.segment)?.label || "";
+      const isCurrentSegment = currentStep === "product" || !selection.product;
       items.push({ 
         label: segmentLabel, 
         onClick: selection.product ? handleBackToProduct : undefined,
-        isCurrent: !selection.product
+        isCurrent: isCurrentSegment && !selection.product
       });
     }
 
+    // Add product if selected
     if (selection.product) {
       const productLabel = currentProducts.find(p => p.id === selection.product)?.label || "";
-      items.push({ label: productLabel, isCurrent: true });
+      
+      // Determine if we need more items after product
+      const hasMoreSteps = currentStep !== "bag-type" && currentStep !== "box-type" && currentStep !== "envelope-type" && 
+                           currentStep !== "etiqueta-type" && currentStep !== "tag-type" && currentStep !== "saco-type" &&
+                           currentStep !== "papel-seda-type" && currentStep !== "papel-barreira-protection" &&
+                           currentStep !== "guardanapo-type" && currentStep !== "papel-wrap-type";
+      
+      items.push({ 
+        label: productLabel, 
+        onClick: hasMoreSteps ? handleBackToProduct : undefined,
+        isCurrent: !hasMoreSteps
+      });
+    }
+
+    // SACOLAS breadcrumb items
+    if (selection.product === "sacolas") {
+      if (selection.bagType) {
+        const bagTypeLabel = bagTypeOptions.find(t => t.id === selection.bagType)?.label || "";
+        const hasMoreBagSteps = currentStep !== "bag-finishing" && currentStep !== "bag-paper-simple";
+        items.push({
+          label: bagTypeLabel,
+          onClick: hasMoreBagSteps ? handleBackToBagType : undefined,
+          isCurrent: !hasMoreBagSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.bagType === "enobrecidas" && selection.bagFinishing.length > 0) {
+        const finishingLabels = selection.bagFinishing.map(f => 
+          bagFinishingOptions.find(opt => opt.id === f)?.label || f
+        ).join(", ");
+        const hasMoreAfterFinishing = currentStep !== "bag-paper-premium";
+        if (currentStep !== "bag-finishing") {
+          items.push({
+            label: `Acabamentos: ${finishingLabels.length > 30 ? finishingLabels.substring(0, 30) + "..." : finishingLabels}`,
+            onClick: hasMoreAfterFinishing ? handleBackToBagFinishing : undefined,
+            isCurrent: !hasMoreAfterFinishing && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.bagPaper) {
+        const paperOptions = selection.bagType === "enobrecidas" ? bagPaperOptionsPremium : bagPaperOptionsSimple;
+        const paperLabel = paperOptions.find(p => p.id === selection.bagPaper)?.label || "";
+        const hasMoreAfterPaper = currentStep !== "bag-handle-simple" && currentStep !== "bag-handle-premium";
+        if (currentStep !== "bag-paper-simple" && currentStep !== "bag-paper-premium") {
+          items.push({
+            label: `Papel: ${paperLabel}`,
+            onClick: hasMoreAfterPaper ? handleBackToBagPaper : undefined,
+            isCurrent: !hasMoreAfterPaper && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.bagHandle) {
+        const handleOptions = selection.bagType === "enobrecidas" ? bagHandleOptionsPremium : bagHandleOptionsSimple;
+        const handleLabel = handleOptions.find(h => h.id === selection.bagHandle)?.label || "";
+        if (currentStep === "confirmation") {
+          items.push({
+            label: `Alça: ${handleLabel}`,
+            isCurrent: true
+          });
+        }
+      }
+    }
+
+    // CAIXAS breadcrumb items
+    if (selection.product === "caixas") {
+      if (selection.boxType) {
+        const boxTypeLabel = boxTypeOptions.find(t => t.id === selection.boxType)?.label || "";
+        const hasMoreBoxSteps = currentStep !== "box-structure-simple" && currentStep !== "box-structure-premium";
+        items.push({
+          label: boxTypeLabel,
+          onClick: hasMoreBoxSteps ? handleBackToBoxType : undefined,
+          isCurrent: !hasMoreBoxSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.boxStructure) {
+        const structureOptions = selection.boxType === "enobrecidas" ? boxStructureOptionsPremium : boxStructureOptionsSimple;
+        const structureLabel = structureOptions.find(s => s.id === selection.boxStructure)?.label || "";
+        const hasMoreAfterStructure = currentStep !== "box-paper-simple" && currentStep !== "box-paper-premium";
+        if (currentStep !== "box-structure-simple" && currentStep !== "box-structure-premium") {
+          items.push({
+            label: structureLabel,
+            onClick: hasMoreAfterStructure ? handleBackToBoxStructure : undefined,
+            isCurrent: !hasMoreAfterStructure && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.boxPaper) {
+        const paperOptions = selection.boxType === "enobrecidas" ? boxPaperOptionsPremium : boxPaperOptionsSimple;
+        const paperLabel = paperOptions.find(p => p.id === selection.boxPaper)?.label || "";
+        const hasMoreAfterPaper = currentStep !== "box-printing" && currentStep !== "box-finishing";
+        if (currentStep !== "box-paper-simple" && currentStep !== "box-paper-premium") {
+          items.push({
+            label: `Papel: ${paperLabel}`,
+            onClick: hasMoreAfterPaper ? handleBackToBoxPaper : undefined,
+            isCurrent: !hasMoreAfterPaper && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.boxType === "enobrecidas" && selection.boxFinishing.length > 0) {
+        if (currentStep !== "box-finishing" && currentStep !== "box-paper-premium") {
+          items.push({
+            label: `Acabamentos`,
+            onClick: currentStep !== "box-extras" ? handleBackToBoxFinishing : undefined,
+            isCurrent: currentStep === "box-extras"
+          });
+        }
+      }
+
+      if (selection.boxType === "simples" && selection.boxPrinting) {
+        const printingLabel = boxPrintingOptions.find(p => p.id === selection.boxPrinting)?.label || "";
+        if (currentStep === "confirmation") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            isCurrent: true
+          });
+        }
+      }
+
+      if (selection.boxExtras.length > 0 && currentStep === "confirmation") {
+        items.push({
+          label: `Itens adicionais`,
+          isCurrent: true
+        });
+      }
+    }
+
+    // ENVELOPES breadcrumb items
+    if (selection.product === "envelopes") {
+      if (selection.envelopeType) {
+        const envelopeTypeLabel = envelopeTypeOptions.find(t => t.id === selection.envelopeType)?.label || "";
+        const hasMoreEnvelopeSteps = currentStep !== "envelope-format-simple" && currentStep !== "envelope-format-premium";
+        items.push({
+          label: envelopeTypeLabel,
+          onClick: hasMoreEnvelopeSteps ? handleBackToEnvelopeType : undefined,
+          isCurrent: !hasMoreEnvelopeSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.envelopeFormat) {
+        const formatOptions = selection.envelopeType === "enobrecido" ? envelopeFormatOptionsPremium : envelopeFormatOptionsSimple;
+        const formatLabel = formatOptions.find(f => f.id === selection.envelopeFormat)?.label || "";
+        const hasMoreAfterFormat = currentStep !== "envelope-paper-simple" && currentStep !== "envelope-paper-premium";
+        if (currentStep !== "envelope-format-simple" && currentStep !== "envelope-format-premium") {
+          items.push({
+            label: formatLabel,
+            onClick: hasMoreAfterFormat ? handleBackToEnvelopeFormat : undefined,
+            isCurrent: !hasMoreAfterFormat && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.envelopePaper) {
+        const paperOptions = selection.envelopeType === "enobrecido" ? envelopePaperOptionsPremium : envelopePaperOptionsSimple;
+        const paperLabel = paperOptions.find(p => p.id === selection.envelopePaper)?.label || "";
+        const hasMoreAfterPaper = currentStep !== "envelope-printing" && currentStep !== "envelope-finishing";
+        if (currentStep !== "envelope-paper-simple" && currentStep !== "envelope-paper-premium") {
+          items.push({
+            label: `Papel: ${paperLabel}`,
+            onClick: hasMoreAfterPaper ? handleBackToEnvelopePaper : undefined,
+            isCurrent: !hasMoreAfterPaper && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.envelopeType === "enobrecido" && selection.envelopeFinishing.length > 0) {
+        if (currentStep !== "envelope-finishing" && currentStep !== "envelope-paper-premium") {
+          items.push({
+            label: `Acabamentos`,
+            onClick: currentStep !== "envelope-closure" ? handleBackToEnvelopeFinishing : undefined,
+            isCurrent: currentStep === "envelope-closure"
+          });
+        }
+      }
+    }
+
+    // ETIQUETAS breadcrumb items
+    if (selection.product === "etiquetas") {
+      if (selection.etiquetaType) {
+        const etiquetaTypeLabel = etiquetaTypeOptions.find(t => t.id === selection.etiquetaType)?.label || "";
+        const hasMoreEtiquetaSteps = currentStep !== "etiqueta-material";
+        items.push({
+          label: etiquetaTypeLabel,
+          onClick: hasMoreEtiquetaSteps ? handleBackToEtiquetaType : undefined,
+          isCurrent: !hasMoreEtiquetaSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.etiquetaMaterial) {
+        const materialLabel = etiquetaMaterialOptions.find(m => m.id === selection.etiquetaMaterial)?.label || "";
+        const hasMoreAfterMaterial = currentStep !== "etiqueta-printing";
+        if (currentStep !== "etiqueta-material") {
+          items.push({
+            label: materialLabel,
+            onClick: hasMoreAfterMaterial ? handleBackToEtiquetaMaterial : undefined,
+            isCurrent: !hasMoreAfterMaterial && currentStep !== "confirmation"
+          });
+        }
+      }
+
+      if (selection.etiquetaPrinting) {
+        const printingLabel = etiquetaPrintingOptions.find(p => p.id === selection.etiquetaPrinting)?.label || "";
+        const hasMoreAfterPrinting = currentStep !== "etiqueta-finishing" && selection.etiquetaMaterial === "couche";
+        if (currentStep !== "etiqueta-printing") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            onClick: hasMoreAfterPrinting ? handleBackToEtiquetaPrinting : undefined,
+            isCurrent: !hasMoreAfterPrinting && currentStep !== "confirmation"
+          });
+        }
+      }
+    }
+
+    // TAGS breadcrumb items
+    if (selection.product === "tags") {
+      if (selection.tagType) {
+        const tagTypeLabel = tagTypeOptions.find(t => t.id === selection.tagType)?.label || "";
+        const hasMoreTagSteps = currentStep !== "tag-material";
+        items.push({
+          label: tagTypeLabel,
+          onClick: hasMoreTagSteps ? handleBackToTagType : undefined,
+          isCurrent: !hasMoreTagSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.tagMaterial) {
+        const materialLabel = tagMaterialOptions.find(m => m.id === selection.tagMaterial)?.label || "";
+        if (currentStep !== "tag-material") {
+          items.push({
+            label: materialLabel,
+            onClick: currentStep !== "tag-printing" ? handleBackToTagMaterial : undefined,
+            isCurrent: currentStep === "tag-printing"
+          });
+        }
+      }
+
+      if (selection.tagPrinting) {
+        const printingLabel = tagPrintingOptions.find(p => p.id === selection.tagPrinting)?.label || "";
+        if (currentStep !== "tag-printing" && currentStep !== "tag-material") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            onClick: currentStep !== "tag-finishing" ? handleBackToTagPrinting : undefined,
+            isCurrent: currentStep === "tag-finishing"
+          });
+        }
+      }
+
+      if (selection.tagFinishing.length > 0) {
+        if (currentStep !== "tag-finishing" && currentStep !== "tag-printing" && currentStep !== "tag-material") {
+          items.push({
+            label: `Acabamentos`,
+            onClick: currentStep !== "tag-cord" ? handleBackToTagFinishing : undefined,
+            isCurrent: currentStep === "tag-cord"
+          });
+        }
+      }
+    }
+
+    // SACOS breadcrumb items
+    if (selection.product === "sacos") {
+      if (selection.sacoType) {
+        const sacoTypeLabel = sacoTypeOptions.find(t => t.id === selection.sacoType)?.label || "";
+        const hasMoreSacoSteps = currentStep !== "saco-material";
+        items.push({
+          label: sacoTypeLabel,
+          onClick: hasMoreSacoSteps ? handleBackToSacoType : undefined,
+          isCurrent: !hasMoreSacoSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.sacoMaterial) {
+        const materialOptions = isFoodService ? sacoMaterialOptionsFoodService : sacoMaterialOptions;
+        const materialLabel = materialOptions.find(m => m.id === selection.sacoMaterial)?.label || "";
+        if (currentStep !== "saco-material") {
+          items.push({
+            label: materialLabel,
+            onClick: currentStep !== "saco-barrier" && currentStep !== "saco-printing" ? handleBackToSacoMaterial : undefined,
+            isCurrent: (currentStep === "saco-barrier" || currentStep === "saco-printing") && !isFoodService
+          });
+        }
+      }
+
+      if (!isFoodService && selection.sacoBarrier) {
+        const barrierLabel = sacoBarrierOptions.find(b => b.id === selection.sacoBarrier)?.label || "";
+        if (currentStep !== "saco-barrier" && currentStep !== "saco-material") {
+          items.push({
+            label: `Proteção: ${barrierLabel}`,
+            onClick: currentStep !== "saco-printing" ? handleBackToSacoBarrier : undefined,
+            isCurrent: currentStep === "saco-printing"
+          });
+        }
+      }
+
+      if (selection.sacoPrinting) {
+        const printingLabel = sacoPrintingOptions.find(p => p.id === selection.sacoPrinting)?.label || "";
+        if (currentStep !== "saco-printing" && currentStep !== "saco-barrier" && currentStep !== "saco-material") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            onClick: currentStep !== "saco-application" ? handleBackToSacoPrinting : undefined,
+            isCurrent: currentStep === "saco-application" || (isFoodService && currentStep === "confirmation")
+          });
+        }
+      }
+    }
+
+    // PAPEL DE SEDA breadcrumb items
+    if (selection.product === "papel-seda") {
+      if (selection.papelSedaType) {
+        const typeLabel = papelSedaTypeOptions.find(t => t.id === selection.papelSedaType)?.label || "";
+        const hasMoreSteps = currentStep !== "papel-seda-printing";
+        items.push({
+          label: typeLabel,
+          onClick: hasMoreSteps ? handleBackToPapelSedaType : undefined,
+          isCurrent: !hasMoreSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.papelSedaPrinting) {
+        const printingLabel = papelSedaPrintingOptions.find(p => p.id === selection.papelSedaPrinting)?.label || "";
+        if (currentStep !== "papel-seda-printing") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            onClick: currentStep !== "papel-seda-application" ? handleBackToPapelSedaPrinting : undefined,
+            isCurrent: currentStep === "papel-seda-application"
+          });
+        }
+      }
+    }
+
+    // PAPEL BARREIRA breadcrumb items
+    if (selection.product === "papel-barreira") {
+      if (selection.papelBarreiraProtection) {
+        const protectionLabel = papelBarreiraProtectionOptions.find(p => p.id === selection.papelBarreiraProtection)?.label || "";
+        const hasMoreSteps = currentStep !== "papel-barreira-format";
+        items.push({
+          label: protectionLabel,
+          onClick: hasMoreSteps ? handleBackToPapelBarreiraProtection : undefined,
+          isCurrent: !hasMoreSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.papelBarreiraFormat) {
+        const formatLabel = papelBarreiraFormatOptions.find(f => f.id === selection.papelBarreiraFormat)?.label || "";
+        if (currentStep !== "papel-barreira-format") {
+          items.push({
+            label: formatLabel,
+            onClick: currentStep !== "papel-barreira-printing" ? handleBackToPapelBarreiraFormat : undefined,
+            isCurrent: currentStep === "papel-barreira-printing"
+          });
+        }
+      }
+
+      if (selection.papelBarreiraPrinting) {
+        const printingLabel = papelBarreiraPrintingOptions.find(p => p.id === selection.papelBarreiraPrinting)?.label || "";
+        if (currentStep !== "papel-barreira-printing" && currentStep !== "papel-barreira-format") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            onClick: currentStep !== "papel-barreira-application" ? handleBackToPapelBarreiraPrinting : undefined,
+            isCurrent: currentStep === "papel-barreira-application"
+          });
+        }
+      }
+    }
+
+    // PAPEL WRAP breadcrumb items
+    if (selection.product === "papel-wrap") {
+      if (selection.papelWrapType) {
+        const typeLabel = papelWrapTypeOptions.find(t => t.id === selection.papelWrapType)?.label || "";
+        const hasMoreSteps = currentStep !== "papel-wrap-format";
+        items.push({
+          label: typeLabel,
+          onClick: hasMoreSteps ? handleBackToPapelWrapType : undefined,
+          isCurrent: !hasMoreSteps && currentStep !== "confirmation"
+        });
+      }
+
+      if (selection.papelWrapFormat) {
+        const formatLabel = papelWrapFormatOptions.find(f => f.id === selection.papelWrapFormat)?.label || "";
+        if (currentStep !== "papel-wrap-format") {
+          items.push({
+            label: formatLabel,
+            onClick: currentStep !== "papel-wrap-printing" ? handleBackToPapelWrapFormat : undefined,
+            isCurrent: currentStep === "papel-wrap-printing"
+          });
+        }
+      }
+
+      if (selection.papelWrapPrinting) {
+        const printingLabel = papelWrapPrintingOptions.find(p => p.id === selection.papelWrapPrinting)?.label || "";
+        if (currentStep !== "papel-wrap-printing" && currentStep !== "papel-wrap-format") {
+          items.push({
+            label: `Impressão: ${printingLabel}`,
+            onClick: currentStep !== "papel-wrap-application" ? handleBackToPapelWrapPrinting : undefined,
+            isCurrent: currentStep === "papel-wrap-application"
+          });
+        }
+      }
     }
 
     return items;
-  }, [selection, currentProducts, handleBackToSegment, handleBackToProduct]);
+  }, [selection, step, currentProducts, isFoodService, handleBackToSegment, handleBackToProduct, 
+      handleBackToBagType, handleBackToBagFinishing, handleBackToBagPaper,
+      handleBackToBoxType, handleBackToBoxStructure, handleBackToBoxPaper, handleBackToBoxFinishing,
+      handleBackToEnvelopeType, handleBackToEnvelopeFormat, handleBackToEnvelopePaper, handleBackToEnvelopeFinishing,
+      handleBackToEtiquetaType, handleBackToEtiquetaMaterial, handleBackToEtiquetaPrinting,
+      handleBackToTagType, handleBackToTagMaterial, handleBackToTagPrinting, handleBackToTagFinishing,
+      handleBackToSacoType, handleBackToSacoMaterial, handleBackToSacoBarrier, handleBackToSacoPrinting,
+      handleBackToPapelSedaType, handleBackToPapelSedaPrinting,
+      handleBackToPapelBarreiraProtection, handleBackToPapelBarreiraFormat, handleBackToPapelBarreiraPrinting,
+      handleBackToPapelWrapType, handleBackToPapelWrapFormat, handleBackToPapelWrapPrinting]);
 
   // Get current step icon for preview
   const getCurrentIcon = () => {
@@ -937,6 +1725,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  description={option.description}
                   onClick={() => handleBagPaperSimpleSelect(option.id)}
                   index={index}
                 />
@@ -962,6 +1751,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  description={option.description}
                   onClick={() => handleBagHandleSimpleSelect(option.id)}
                   index={index}
                 />
@@ -988,6 +1778,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  description={option.description}
                   isSelected={selection.bagFinishing.includes(option.id)}
                   isMultiSelect
                   onClick={() => handleBagFinishingToggle(option.id)}
@@ -1023,6 +1814,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  description={option.description}
                   onClick={() => handleBagPaperPremiumSelect(option.id)}
                   index={index}
                 />
@@ -1048,6 +1840,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  description={option.description}
                   onClick={() => handleBagHandlePremiumSelect(option.id)}
                   index={index}
                 />
@@ -1147,7 +1940,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Qual tipo de impressão?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {boxPrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1259,7 +2052,7 @@ export function ProductSelector() {
               Deseja algum item adicional?
             </h3>
             <p className="text-sm text-muted-foreground">Opcional - selecione se desejar</p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {boxExtraOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1347,7 +2140,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Qual o tipo de papel?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {envelopePaperOptionsSimple.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1372,7 +2165,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Qual tipo de impressão?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {envelopePrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1453,6 +2246,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  description={option.description}
                   isSelected={selection.envelopeFinishing.includes(option.id)}
                   isMultiSelect
                   onClick={() => handleEnvelopeFinishingToggle(option.id)}
@@ -1536,7 +2330,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Deseja personalização?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {papelSedaPrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1589,7 +2383,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Qual tipo de etiqueta você precisa?
             </h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {etiquetaTypeOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1639,7 +2433,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Qual tipo de impressão?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {etiquetaPrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -1664,9 +2458,9 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Deseja algum acabamento?
             </h3>
-            <p className="text-sm text-muted-foreground">Selecione uma ou mais opções</p>
+            <p className="text-sm text-muted-foreground">Selecione uma ou mais opções (disponível para papel couchê)</p>
             <div className="grid grid-cols-2 gap-4">
-              {etiquetaFinishingOptions.map((option, index) => (
+              {etiquetaFinishingOptionsCouche.map((option, index) => (
                 <SelectionCard
                   key={option.id}
                   label={option.label}
@@ -1865,8 +2659,8 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Qual material do saco?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
-              {sacoMaterialOptions.map((option, index) => (
+            <div className="grid grid-cols-2 gap-4">
+              {(isFoodService ? sacoMaterialOptionsFoodService : sacoMaterialOptions).map((option, index) => (
                 <SelectionCard
                   key={option.id}
                   label={option.label}
@@ -1915,7 +2709,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Deseja personalização?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {sacoPrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -2018,7 +2812,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Deseja personalização?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {papelBarreiraPrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
@@ -2149,7 +2943,7 @@ export function ProductSelector() {
             <h3 className="text-xl font-heading font-semibold text-foreground">
               Deseja personalização?
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {papelWrapPrintingOptions.map((option, index) => (
                 <SelectionCard
                   key={option.id}
