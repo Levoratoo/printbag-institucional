@@ -88,10 +88,12 @@ export default function SolucoesPage() {
     <Layout>
       {/* Hero Section */}
       <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-muted" />
+        <div className="absolute inset-0">
+          <img src={productsCollection} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+        </div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className="max-w-3xl">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -135,22 +137,6 @@ export default function SolucoesPage() {
                     </span>
                   </a>
                 ))}
-              </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="relative"
-            >
-              <div className="rounded-2xl overflow-hidden shadow-strong">
-                <img 
-                  src={productsCollection} 
-                  alt="Coleção de sacolas e embalagens Printbag" 
-                  className="w-full h-auto"
-                />
-              </div>
             </motion.div>
           </div>
         </div>

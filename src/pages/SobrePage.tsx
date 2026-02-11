@@ -319,14 +319,14 @@ export default function SobrePage() {
             className="max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-primary-foreground mb-6">
-              Faça Parte da Nossa História
+              Fale com um Especialista
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-8">
               Junte-se às centenas de marcas que confiam na Printbag para suas embalagens.
             </p>
             <Button variant="heroPrimary" size="xl" asChild className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
-              <Link to="/contato?assunto=Falar com Recursos Humanos">
-                Trabalhe Conosco
+              <Link to="/contato?assunto=Fazer um orçamento">
+                Solicite um Orçamento
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>

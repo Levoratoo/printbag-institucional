@@ -107,13 +107,13 @@ export function Header() {
                   <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <div className="bg-card rounded-lg shadow-medium p-2 min-w-[200px] border border-border">
                       {item.submenu.map((subItem) => (
-                        <Link
+                        <a
                           key={subItem.name}
-                          to={subItem.path}
+                          href={subItem.path}
                           className="block px-4 py-2 text-sm text-card-foreground hover:bg-muted rounded-md transition-colors"
                         >
                           {subItem.name}
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>

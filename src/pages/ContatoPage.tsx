@@ -328,7 +328,7 @@ export default function ContatoPage() {
                 </h3>
                 <div className="aspect-video rounded-lg overflow-hidden bg-card border border-border">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.0!2d-51.2!3d-30.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAwJzAwLjAiUyA1McKwMTInMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.5!2d-48.6544!3d-27.0253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8b10b0b0b0b0b%3A0x0!2sAv.+Jos%C3%A9+Francisco+Bernardes%2C+1751+-+Areias%2C+Cambori%C3%BA+-+SC%2C+88345-200!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
