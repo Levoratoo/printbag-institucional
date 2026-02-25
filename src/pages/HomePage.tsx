@@ -157,16 +157,16 @@ export default function HomePage() {
         
         {/* Infinite Scroll Carousel */}
         <div className="relative">
-          <div className="flex animate-marquee">
+          <div className="flex animate-marquee items-center">
             {[...clients, ...clients, ...clients].map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
-                className="flex-shrink-0 mx-8 md:mx-12 grayscale hover:grayscale-0 transition-all duration-300"
+                className="flex-shrink-0 mx-8 md:mx-12 flex items-center justify-center w-[120px] md:w-[160px] h-[60px] md:h-[80px]"
               >
                 <img 
                   src={client.logo} 
                   alt={client.name}
-                  className="h-10 md:h-14 w-auto object-contain"
+                  className="max-h-[50px] md:max-h-[65px] max-w-[120px] md:max-w-[160px] w-auto h-auto object-contain"
                 />
               </div>
             ))}
