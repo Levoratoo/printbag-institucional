@@ -45,8 +45,10 @@ import logoMaryKay from "@/assets/clients/mary-kay.png";
 import logoMelissa from "@/assets/clients/melissa.png";
 import logoMilon from "@/assets/clients/milon.png";
 import logoRaiaDrogasil from "@/assets/clients/raiadrogasil.png";
+import logoRiachuelo from "@/assets/clients/riachuelo.png";
 import logoSubway from "@/assets/clients/subway.png";
 import logoUsaflex from "@/assets/clients/usaflex.png";
+import logoVivo from "@/assets/clients/vivo.png";
 
 const clients = [
   { name: "Aramis", logo: logoAramis },
@@ -62,8 +64,10 @@ const clients = [
   { name: "Melissa", logo: logoMelissa },
   { name: "Milon", logo: logoMilon },
   { name: "RaiaDrogasil", logo: logoRaiaDrogasil },
+  { name: "Riachuelo", logo: logoRiachuelo },
   { name: "Subway", logo: logoSubway },
   { name: "Usaflex", logo: logoUsaflex },
+  { name: "Vivo", logo: logoVivo },
 ];
 
 const stats = [
