@@ -32,38 +32,28 @@ import sectorSupermercados from "@/assets/sector-supermercados.jpg";
 import sectorFood from "@/assets/sector-food.jpg";
 
 // Client logos - Alphabetical order
-import logoAramis from "@/assets/clients/aramis.png";
-import logoArezzo from "@/assets/clients/arezzo.png";
 import logoCarolinaHerrera from "@/assets/clients/carolina-herrera.png";
 import logoClaro from "@/assets/clients/claro.png";
-import logoConstance from "@/assets/clients/constance.png";
 import logoDemocrata from "@/assets/clients/democrata.png";
-import logoGrendene from "@/assets/clients/grendene.png";
 import logoLacoste from "@/assets/clients/lacoste.png";
 import logoMadero from "@/assets/clients/madero.png";
-import logoMaryKay from "@/assets/clients/mary-kay.png";
 import logoMelissa from "@/assets/clients/melissa.png";
-import logoMilon from "@/assets/clients/milon.png";
-import logoRaiaDrogasil from "@/assets/clients/raiadrogasil.png";
+import logoPilao from "@/assets/clients/pilao.png";
+import logoRiachuelo from "@/assets/clients/riachuelo.png";
 import logoSubway from "@/assets/clients/subway.png";
-import logoUsaflex from "@/assets/clients/usaflex.png";
+import logoVivo from "@/assets/clients/vivo.png";
 
 const clients = [
-  { name: "Aramis", logo: logoAramis },
-  { name: "Arezzo", logo: logoArezzo },
   { name: "Carolina Herrera", logo: logoCarolinaHerrera },
   { name: "Claro", logo: logoClaro },
-  { name: "Constance", logo: logoConstance },
   { name: "Democrata", logo: logoDemocrata },
-  { name: "Grendene", logo: logoGrendene },
   { name: "Lacoste", logo: logoLacoste },
   { name: "Madero", logo: logoMadero },
-  { name: "Mary Kay", logo: logoMaryKay },
   { name: "Melissa", logo: logoMelissa },
-  { name: "Milon", logo: logoMilon },
-  { name: "RaiaDrogasil", logo: logoRaiaDrogasil },
+  { name: "Pilão", logo: logoPilao },
+  { name: "Riachuelo", logo: logoRiachuelo },
   { name: "Subway", logo: logoSubway },
-  { name: "Usaflex", logo: logoUsaflex },
+  { name: "Vivo", logo: logoVivo },
 ];
 
 const stats = [
