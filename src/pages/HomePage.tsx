@@ -170,9 +170,9 @@ export default function HomePage() {
         </div>
         
         {/* Infinite Scroll Carousel */}
-        <div className="relative">
-          <div className="flex animate-marquee">
-            {[...clients, ...clients, ...clients].map((client, index) => (
+        <div className="relative overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
                 className="flex-shrink-0 mx-8 md:mx-12 grayscale hover:grayscale-0 transition-all duration-300"
