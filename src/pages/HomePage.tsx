@@ -28,6 +28,7 @@ import sectorSuperFarma from "@/assets/sector-supermercados-farmacias.jpg";
 import sectorCosmeticos from "@/assets/sector-cosmeticos.jpg";
 import sectorFoodService from "@/assets/sector-food-service.jpg";
 import sectorJoias from "@/assets/sector-joias.jpg";
+import sectorAtacado from "@/assets/sector-atacado.jpg";
 
 // Client logos - Alphabetical order
 import logoAramis from "@/assets/clients/aramis.png";
