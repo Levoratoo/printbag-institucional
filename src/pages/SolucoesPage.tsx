@@ -217,10 +217,10 @@ export default function SolucoesPage() {
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
                     >
-                      <Card className="border-border hover:border-primary/50 transition-colors group h-full">
-                        <CardContent className="p-0">
+                    <Card className="border-border hover:border-primary/50 transition-colors group h-full flex flex-col">
+                        <CardContent className="p-0 flex flex-col h-full">
                           {/* Image */}
-                          <div className="aspect-[4/3] rounded-t-lg overflow-hidden">
+                          <div className="aspect-[4/3] rounded-t-lg overflow-hidden flex-shrink-0">
                             {finish.image ? (
                               <img src={finish.image} alt={finish.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                             ) : (
