@@ -213,9 +213,15 @@ export default function SolucoesPage() {
                     >
                       <Card className="border-border hover:border-primary/50 transition-colors group h-full">
                         <CardContent className="p-0">
-                          {/* Image placeholder */}
-                          <div className="aspect-[4/3] bg-muted-foreground/10 rounded-t-lg flex items-center justify-center">
-                            <Sparkles className="w-12 h-12 text-muted-foreground/30" />
+                          {/* Image */}
+                          <div className="aspect-[4/3] rounded-t-lg overflow-hidden">
+                            {finish.image ? (
+                              <img src={finish.image} alt={finish.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            ) : (
+                              <div className="w-full h-full bg-muted-foreground/10 flex items-center justify-center">
+                                <Sparkles className="w-12 h-12 text-muted-foreground/30" />
+                              </div>
+                            )}
                           </div>
                           <div className="p-6">
                             <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
