@@ -90,7 +90,7 @@ export default function SolucoesPage() {
       <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 overflow-hidden">
         <div className="absolute inset-0">
           <img src={solucoesHero} alt="Embalagens Printbag" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
