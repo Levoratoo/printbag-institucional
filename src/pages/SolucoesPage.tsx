@@ -208,7 +208,7 @@ export default function SolucoesPage() {
               ]}
               className="w-full"
             >
-              <CarouselContent className="-ml-4">
+              <CarouselContent className="-ml-4 items-stretch">
                 {finishes.map((finish, index) => (
                   <CarouselItem key={finish.title} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                     <motion.div
