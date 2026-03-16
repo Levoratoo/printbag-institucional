@@ -9,15 +9,8 @@ import {
   Tag,
   Scissors,
   Layers,
-  Shirt,
-  Footprints,
-  Gem,
-  Cookie,
   Utensils,
-  Pill,
-  Store,
   Sparkles,
-  Truck,
   Croissant,
   Square
 } from "lucide-react";
