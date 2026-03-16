@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface SelectionCardProps {
   icon?: React.ComponentType<{ className?: string }>;
+  image?: string;
   label: string;
   description?: string;
   isSelected?: boolean;
