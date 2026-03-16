@@ -900,13 +900,19 @@ export function ProductSelector() {
   // BUILD SUMMARY ITEMS
   // ========================
   const buildSummaryItems = useCallback(() => {
-    const items: { label: string; value: string | string[] }[] = [];
+     const items: { label: string; value: string | string[] }[] = [];
     
-    const segmentLabel = segments.find(s => s.id === selection.segment)?.label;
-    if (segmentLabel) items.push({ label: "Segmento", value: segmentLabel });
-
-    const productLabel = currentProducts.find(p => p.id === selection.product)?.label;
+    // Find product label from all possible sources
+    const allProducts = [...directProducts, ...subProductsAdicionais, ...subProductsFood];
+    const productLabel = allProducts.find(p => p.id === selection.product)?.label;
     if (productLabel) items.push({ label: "Produto", value: productLabel });
+
+    // Add category if from sub-products
+    if (selection.segment === "itens-adicionais") {
+      items.push({ label: "Categoria", value: "Itens Adicionais" });
+    } else if (selection.segment === "itens-adicionais-food") {
+      items.push({ label: "Categoria", value: "Itens Adicionais para Food" });
+    }
 
     // Bag summary
     if (selection.product === "sacolas") {
