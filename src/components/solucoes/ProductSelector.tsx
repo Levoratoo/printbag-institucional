@@ -1692,15 +1692,19 @@ export function ProductSelector() {
               Qual o tipo de papel?
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              {bagPaperOptionsSimple.map((option, index) => (
-                <SelectionCard
-                  key={option.id}
-                  label={option.label}
-                  description={option.description}
-                  onClick={() => handleBagPaperSimpleSelect(option.id)}
-                  index={index}
-                />
-              ))}
+              {bagPaperOptionsSimple.map((option, index) => {
+                const paperImage = option.id === "kraft" ? productSacolaKraft : productSacolaBranco;
+                return (
+                  <SelectionCard
+                    key={option.id}
+                    label={option.label}
+                    description={option.description}
+                    image={paperImage}
+                    onClick={() => handleBagPaperSimpleSelect(option.id)}
+                    index={index}
+                  />
+                );
+              })}
             </div>
           </motion.div>
         );
