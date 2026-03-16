@@ -117,27 +117,31 @@ const subProductsFood = [
 
 export function ProductSelector() {
   const navigate = useNavigate();
-  const [step, setStep] = useState<FlowStep>("segment");
+  const [step, setStep] = useState<FlowStep>("product");
   const [selection, setSelection] = useState<SelectionState>(initialSelectionState);
 
-  const currentProducts = selection.segment ? segmentProducts[selection.segment] || [] : [];
-
-  // Helper to check if in food-service segment
-  const isFoodService = selection.segment === "food-service";
+  // Helper to get the category label for a product
+  const getProductCategory = (productId: string | null) => {
+    if (!productId) return null;
+    if (subProductsAdicionais.find(p => p.id === productId)) return "itens-adicionais";
+    if (subProductsFood.find(p => p.id === productId)) return "itens-adicionais-food";
+    return null;
+  };
 
   // Reset functions for navigation
-  const handleBackToSegment = useCallback(() => {
+  const handleBackToProducts = useCallback(() => {
     setSelection(initialSelectionState);
-    setStep("segment");
+    setStep("product");
   }, []);
 
-  const handleBackToProduct = useCallback(() => {
+  const handleBackToSubProduct = useCallback(() => {
+    const category = getProductCategory(selection.product);
     setSelection(prev => ({
       ...initialSelectionState,
       segment: prev.segment
     }));
-    setStep("product");
-  }, []);
+    setStep("sub-product");
+  }, [selection.product]);
 
   // Back to bag type
   const handleBackToBagType = useCallback(() => {
