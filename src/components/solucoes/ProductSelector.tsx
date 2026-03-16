@@ -91,83 +91,29 @@ import {
   papelWrapApplicationOptions
 } from "./ProductFlowData";
 
-// Segments definition
-const segments = [
-  { id: "vestuario", label: "Vestuário", icon: Shirt },
-  { id: "calcados", label: "Calçados", icon: Footprints },
-  { id: "cosmeticos", label: "Cosméticos", icon: Sparkles },
-  { id: "joias-acessorios", label: "Jóias / Acessórios", icon: Gem },
-  { id: "alimentos", label: "Alimentos", icon: Cookie },
-  { id: "food-service", label: "Food Service", icon: Utensils },
-  { id: "farmacias", label: "Farmácias", icon: Pill },
-  { id: "supermercados", label: "Supermercados", icon: Store },
-  { id: "atacado-distribuidores", label: "Atacado/Distribuidores", icon: Truck }
+// Direct product categories
+const directProducts = [
+  { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
+  { id: "envelopes", label: "Envelopes", icon: FileText },
+  { id: "caixas", label: "Caixas", icon: Box },
+  { id: "itens-adicionais", label: "Itens Adicionais", icon: Tag },
+  { id: "sacos", label: "Sacos", icon: Package },
+  { id: "itens-adicionais-food", label: "Itens Adicionais para Food", icon: Utensils }
 ];
 
-// Products by segment
-const segmentProducts: Record<string, { id: string; label: string; icon: React.ComponentType<any> }[]> = {
-  vestuario: [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "envelopes", label: "Envelopes", icon: FileText },
-    { id: "papel-seda", label: "Papel de Seda", icon: Scissors },
-    { id: "etiquetas", label: "Etiquetas", icon: Tag },
-    { id: "tags", label: "Tags", icon: Tag }
-  ],
-  calcados: [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "papel-seda", label: "Papel de Seda", icon: Scissors },
-    { id: "etiquetas", label: "Etiquetas", icon: Tag },
-    { id: "tags", label: "Tags", icon: Tag }
-  ],
-  cosmeticos: [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "envelopes", label: "Envelopes", icon: FileText },
-    { id: "papel-seda", label: "Papel de Seda", icon: Scissors },
-    { id: "etiquetas", label: "Etiquetas", icon: Tag },
-    { id: "tags", label: "Tags", icon: Tag }
-  ],
-  "joias-acessorios": [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "envelopes", label: "Envelopes", icon: FileText }
-  ],
-  alimentos: [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "sacos", label: "Sacos", icon: Package },
-    { id: "papel-barreira", label: "Papel Barreira", icon: Layers },
-    { id: "etiquetas", label: "Etiquetas", icon: Tag }
-  ],
-  "food-service": [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "sacos", label: "Sacos", icon: Package },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "guardanapos", label: "Guardanapos", icon: Square },
-    { id: "papel-barreira", label: "Papel Barreira", icon: Layers },
-    { id: "papel-wrap", label: "Papel Wrap", icon: Croissant }
-  ],
-  farmacias: [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "sacos", label: "Sacos", icon: Package }
-  ],
-  supermercados: [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "sacos", label: "Sacos", icon: Package },
-    { id: "caixas", label: "Caixas", icon: Box }
-  ],
-  "atacado-distribuidores": [
-    { id: "sacolas", label: "Sacolas", icon: ShoppingBag },
-    { id: "caixas", label: "Caixas", icon: Box },
-    { id: "envelopes", label: "Envelopes", icon: FileText },
-    { id: "etiquetas", label: "Etiquetas", icon: Tag },
-    { id: "tags", label: "Tags", icon: Tag },
-    { id: "papel-seda", label: "Papel de Seda", icon: Scissors }
-  ]
-};
+// Sub-products for "Itens Adicionais"
+const subProductsAdicionais = [
+  { id: "papel-seda", label: "Papel de Seda", icon: Scissors },
+  { id: "etiquetas", label: "Etiquetas", icon: Tag },
+  { id: "tags", label: "Tags", icon: Tag }
+];
+
+// Sub-products for "Itens Adicionais para Food"
+const subProductsFood = [
+  { id: "guardanapos", label: "Guardanapos", icon: Square },
+  { id: "papel-barreira", label: "Papel Barreira", icon: Layers },
+  { id: "papel-wrap", label: "Papel Wrap", icon: Croissant }
+];
 
 export function ProductSelector() {
   const navigate = useNavigate();
