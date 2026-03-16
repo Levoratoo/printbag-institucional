@@ -1593,32 +1593,6 @@ export function ProductSelector() {
   // Render step content
   const renderStepContent = () => {
     switch (step) {
-      case "segment":
-        return (
-          <motion.div
-            key="segments"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            className="space-y-4"
-          >
-            <h3 className="text-xl font-heading font-semibold text-foreground">
-              Selecione o segmento:
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {segments.map((segment, index) => (
-                <SelectionCard
-                  key={segment.id}
-                  icon={segment.icon}
-                  label={segment.label}
-                  onClick={() => handleSegmentSelect(segment.id)}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
-        );
-
       case "product":
         return (
           <motion.div
@@ -1632,7 +1606,7 @@ export function ProductSelector() {
               Selecione o produto:
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {currentProducts.map((product, index) => (
+              {directProducts.map((product, index) => (
                 <SelectionCard
                   key={product.id}
                   icon={product.icon}
@@ -1643,6 +1617,37 @@ export function ProductSelector() {
               ))}
             </div>
           </motion.div>
+        );
+
+      case "sub-product":
+        {
+          const subProducts = selection.segment === "itens-adicionais" ? subProductsAdicionais : subProductsFood;
+          const categoryLabel = selection.segment === "itens-adicionais" ? "Itens Adicionais" : "Itens Adicionais para Food";
+          return (
+            <motion.div
+              key="sub-products"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              className="space-y-4"
+            >
+              <h3 className="text-xl font-heading font-semibold text-foreground">
+                {categoryLabel} — Selecione o produto:
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {subProducts.map((product, index) => (
+                  <SelectionCard
+                    key={product.id}
+                    icon={product.icon}
+                    label={product.label}
+                    onClick={() => handleSubProductSelect(product.id)}
+                    index={index}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          );
+        }
         );
 
       // ========================
