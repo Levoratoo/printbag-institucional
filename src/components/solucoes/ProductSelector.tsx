@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { SelectionCard } from "./SelectionCard";
 import { FlowBreadcrumb } from "./FlowBreadcrumb";
 import { FlowSummary } from "./FlowSummary";
+import { FlowLiveSummary } from "./FlowLiveSummary";
 import {
   FlowStep,
   SelectionState,
