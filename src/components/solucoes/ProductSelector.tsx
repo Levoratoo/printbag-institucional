@@ -3006,30 +3006,17 @@ export function ProductSelector() {
             </AnimatePresence>
           </div>
 
-          {/* Preview Area */}
+          {/* Live Summary */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-muted rounded-2xl p-8 md:p-12 aspect-square flex items-center justify-center sticky top-32"
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={step}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="text-center"
-              >
-                <CurrentIcon className="w-24 h-24 text-primary/30 mx-auto" />
-                <p className="text-muted-foreground mt-4">
-                  {step === "product" && "Selecione um produto para começar"}
-                  {step === "sub-product" && "Selecione um produto"}
-                  {step === "confirmation" && "Pronto para solicitar orçamento!"}
-                  {step !== "product" && step !== "sub-product" && step !== "confirmation" && "Configure as opções"}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+            <FlowLiveSummary
+              items={buildSummaryItems()}
+              isComplete={step === "confirmation"}
+              onSubmit={handleSubmit}
+            />
           </motion.div>
         </div>
       </div>
