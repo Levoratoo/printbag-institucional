@@ -103,7 +103,7 @@ export default function SobrePage() {
       </section>
 
       {/* Factory Image Section */}
-      <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -149,13 +149,8 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="container mx-auto px-4">
-        <div className="h-px bg-border" />
-      </div>
-
       {/* Timeline */}
-      <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28 bg-muted">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
