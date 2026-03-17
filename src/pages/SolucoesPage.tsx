@@ -80,11 +80,6 @@ const finishes = [
     image: finishLaminacaoFosca
   },
   {
-    title: "Verniz Localizado",
-    description: "Aplicação de verniz em áreas específicas da embalagem.",
-    image: finishVernizLocalizado
-  },
-  {
     title: "Verniz Total",
     description: "Camada de verniz aplicada em toda a superfície.",
     image: finishVernizTotal
