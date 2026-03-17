@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AutoScroll from "embla-carousel-auto-scroll";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { 
