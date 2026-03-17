@@ -107,7 +107,7 @@ export default function ContatoPage() {
     <Layout>
 
       {/* Form Section */}
-      <section className="py-20 md:py-28">
+      <section className="pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Form */}
