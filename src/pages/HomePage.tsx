@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AutoScroll from "embla-carousel-auto-scroll";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { 
@@ -418,7 +419,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <Carousel opts={{ align: "start", loop: true }} className="w-full max-w-5xl mx-auto">
+          <Carousel opts={{ align: "start", loop: true }} plugins={[AutoScroll({ speed: 1, stopOnInteraction: false })]} className="w-full max-w-5xl mx-auto">
             <CarouselContent className="-ml-4">
               {/* Selo FSC */}
               <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
