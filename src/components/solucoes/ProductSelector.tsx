@@ -1751,6 +1751,7 @@ export function ProductSelector() {
                   label={option.label}
                   description={option.description}
                   image={handleImages[option.id]}
+                  imageClassName={handleImageClasses[option.id]}
                   onClick={() => handleBagHandleSimpleSelect(option.id)}
                   index={index}
                 />
