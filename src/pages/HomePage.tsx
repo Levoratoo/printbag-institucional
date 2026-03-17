@@ -418,83 +418,76 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Selo FSC */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300"
-            >
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloFsc} alt="Selo FSC" className="w-full h-full object-contain" />
-              </div>
-              <h3 className="text-lg font-heading font-bold text-foreground mb-3">
-                Selo FSC
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Utilizamos matéria-prima certificada e originária de madeira de reflorestamento.
-              </p>
-            </motion.div>
+          <Carousel opts={{ align: "start", loop: true }} className="w-full max-w-5xl mx-auto">
+            <CarouselContent className="-ml-4">
+              {/* Selo FSC */}
+              <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 h-full">
+                  <div className="w-20 h-20 flex items-center justify-center mb-5">
+                    <img src={seloFsc} alt="Selo FSC" className="w-full h-full object-contain" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo FSC</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Utilizamos matéria-prima certificada e originária de madeira de reflorestamento.
+                  </p>
+                </div>
+              </CarouselItem>
 
-            {/* Selo Energia Renovável */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300"
-            >
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloEnergia} alt="Selo Energia Renovável" className="w-full h-full object-contain" />
-              </div>
-              <h3 className="text-lg font-heading font-bold text-foreground mb-3">
-                Selo Energia Renovável
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Reduzimos nossa emissão de gases de efeito estufa a partir da geração de energia renovável.
-              </p>
-            </motion.div>
+              {/* Selo Energia Renovável */}
+              <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 h-full">
+                  <div className="w-20 h-20 flex items-center justify-center mb-5">
+                    <img src={seloEnergia} alt="Selo Energia Renovável" className="w-full h-full object-contain" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo Energia Renovável</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Reduzimos nossa emissão de gases de efeito estufa a partir da geração de energia renovável.
+                  </p>
+                </div>
+              </CarouselItem>
 
-            {/* Certificado ABVTEX */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300"
-            >
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloAbvtex} alt="Certificado ABVTEX" className="w-full h-full object-contain" />
-              </div>
-              <h3 className="text-lg font-heading font-bold text-foreground mb-3">
-                Certificado ABVTEX
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Buscamos ações de boas práticas socioambientais e de governança no ambiente corporativo.
-              </p>
-            </motion.div>
+              {/* Certificado ABVTEX */}
+              <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 h-full">
+                  <div className="w-20 h-20 flex items-center justify-center mb-5">
+                    <img src={seloAbvtex} alt="Certificado ABVTEX" className="w-full h-full object-contain" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold text-foreground mb-3">Certificado ABVTEX</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Buscamos ações de boas práticas socioambientais e de governança no ambiente corporativo.
+                  </p>
+                </div>
+              </CarouselItem>
 
-            {/* Certificado de Excelência Gráfica */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300"
-            >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                <Award className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-lg font-heading font-bold text-foreground mb-3">
-                Excelência Gráfica
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Excelência reconhecida com múltiplos títulos no Prêmio Fernando Pini.
-              </p>
-            </motion.div>
-          </div>
+              {/* Selo Two Sides */}
+              <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 h-full">
+                  <div className="w-20 h-20 flex items-center justify-center mb-5">
+                    <img src={seloTwoSides} alt="Selo Two Sides" className="w-full h-full object-contain" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo Two Sides</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Iniciativa global que certifica empresas comprometidas com a sustentabilidade do papel como material renovável, reciclável e biodegradável.
+                  </p>
+                </div>
+              </CarouselItem>
+
+              {/* Certificado de Excelência Gráfica */}
+              <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 h-full">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                    <Award className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold text-foreground mb-3">Excelência Gráfica</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Excelência reconhecida com múltiplos títulos no Prêmio Fernando Pini.
+                  </p>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 md:-left-6" />
+            <CarouselNext className="-right-4 md:-right-6" />
+          </Carousel>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
