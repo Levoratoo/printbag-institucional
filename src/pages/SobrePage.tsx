@@ -154,6 +154,71 @@ export default function SobrePage() {
         </div>
       </section>
 
+      {/* Timeline */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground">
+              Nossa Trajetória
+            </h2>
+          </motion.div>
+
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border hidden lg:block" />
+
+            <div className="space-y-16">
+              {timeline.map((item, index) => (
+                <motion.div
+                  key={item.year}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`lg:flex items-center gap-8 ${
+                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                  }`}
+                >
+                  <div className={`lg:w-1/2 ${index % 2 === 0 ? "lg:text-right lg:pr-8" : "lg:text-left lg:pl-8"}`}>
+                    <div className="bg-card rounded-xl p-6 border border-border shadow-medium">
+                      <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? "lg:justify-end" : ""}`}>
+                        <Calendar className="w-5 h-5 text-primary" />
+                        <span className="text-2xl font-heading font-bold text-primary">
+                          {item.year}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-4">
+                        {item.description}
+                      </p>
+                      <div className="rounded-lg overflow-hidden">
+                        <img 
+                          src={item.image} 
+                          alt={`${item.title} - ${item.year}`}
+                          className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Dot */}
+                  <div className="hidden lg:flex w-4 h-4 rounded-full bg-primary border-4 border-background relative z-10" />
+                  
+                  <div className="lg:w-1/2" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Mission, Vision, Values */}
       <section className="py-20 md:py-28 bg-muted">
         <div className="container mx-auto px-4">
@@ -230,71 +295,6 @@ export default function SobrePage() {
                 Princípios
               </span>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground">
-              NOSSA TRAJETÓRIA
-            </h2>
-          </motion.div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border hidden lg:block" />
-
-            <div className="space-y-16">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={item.year}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`lg:flex items-center gap-8 ${
-                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                  }`}
-                >
-                  <div className={`lg:w-1/2 ${index % 2 === 0 ? "lg:text-right lg:pr-8" : "lg:text-left lg:pl-8"}`}>
-                    <div className="bg-card rounded-xl p-6 border border-border shadow-medium">
-                      <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? "lg:justify-end" : ""}`}>
-                        <Calendar className="w-5 h-5 text-primary" />
-                        <span className="text-2xl font-heading font-bold text-primary">
-                          {item.year}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-4">
-                        {item.description}
-                      </p>
-                      <div className="rounded-lg overflow-hidden">
-                        <img 
-                          src={item.image} 
-                          alt={`${item.title} - ${item.year}`}
-                          className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Timeline Dot */}
-                  <div className="hidden lg:flex w-4 h-4 rounded-full bg-primary border-4 border-background relative z-10" />
-                  
-                  <div className="lg:w-1/2" />
-                </motion.div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
