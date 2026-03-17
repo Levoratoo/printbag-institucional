@@ -163,8 +163,8 @@ export default function SobrePage() {
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-6">
-              Missão, Visão e Valores
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground">
+              O que nos <span className="text-primary">move</span> todo dia
             </h2>
           </motion.div>
 
@@ -174,22 +174,19 @@ export default function SobrePage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-card rounded-2xl overflow-hidden border border-border shadow-medium group"
+              className="bg-card rounded-2xl border border-border shadow-medium p-8"
             >
-              <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-                {/* Placeholder para foto institucional */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-                  <Target className="w-16 h-16 text-primary/30" />
-                </div>
-              </div>
-              <div className="p-8 text-center">
-                <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
-                  Missão
-                </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Inovar, encantar e apaixonar pessoas.
-                </p>
-              </div>
+              <span className="text-primary font-medium uppercase tracking-wider text-sm">Missão</span>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mt-3 mb-4">
+                Por que existimos
+              </h3>
+              <div className="w-12 h-0.5 bg-primary mb-6" />
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Inovar, encantar e apaixonar pessoas: criando embalagens que traduzem a identidade de cada marca com precisão e cuidado.
+              </p>
+              <span className="inline-block border border-primary text-primary text-sm font-medium px-4 py-1.5 rounded-full">
+                Propósito
+              </span>
             </motion.div>
 
             {/* Visão */}
@@ -198,22 +195,19 @@ export default function SobrePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-card rounded-2xl overflow-hidden border border-border shadow-medium group"
+              className="bg-card rounded-2xl border border-border shadow-medium p-8"
             >
-              <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-                {/* Placeholder para foto institucional */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-                  <Eye className="w-16 h-16 text-primary/30" />
-                </div>
-              </div>
-              <div className="p-8 text-center">
-                <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
-                  Visão
-                </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Ser a primeira escolha dos clientes.
-                </p>
-              </div>
+              <span className="text-primary font-medium uppercase tracking-wider text-sm">Visão</span>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mt-3 mb-4">
+                Para onde vamos
+              </h3>
+              <div className="w-12 h-0.5 bg-primary mb-6" />
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Ser a primeira escolha dos clientes: referência nacional em embalagens que unem design, sustentabilidade e excelência produtiva.
+              </p>
+              <span className="inline-block border border-primary text-primary text-sm font-medium px-4 py-1.5 rounded-full">
+                Futuro
+              </span>
             </motion.div>
 
             {/* Valores */}
@@ -222,22 +216,19 @@ export default function SobrePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-card rounded-2xl overflow-hidden border border-border shadow-medium group"
+              className="bg-card rounded-2xl border border-border shadow-medium p-8"
             >
-              <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-                {/* Placeholder para foto institucional */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-                  <Heart className="w-16 h-16 text-primary/30" />
-                </div>
-              </div>
-              <div className="p-8 text-center">
-                <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
-                  Valores
-                </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Justos socialmente, corretos ambientalmente e viáveis economicamente.
-                </p>
-              </div>
+              <span className="text-primary font-medium uppercase tracking-wider text-sm">Valores</span>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mt-3 mb-4">
+                Como agimos
+              </h3>
+              <div className="w-12 h-0.5 bg-primary mb-6" />
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Justos socialmente, corretos ambientalmente e viáveis economicamente: equilíbrio que guia cada decisão, do chão de fábrica ao cliente.
+              </p>
+              <span className="inline-block border border-primary text-primary text-sm font-medium px-4 py-1.5 rounded-full">
+                Princípios
+              </span>
             </motion.div>
           </div>
         </div>
