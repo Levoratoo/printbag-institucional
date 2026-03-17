@@ -457,8 +457,8 @@ export default function HomePage() {
               transition={{ delay: 0.3 }}
               className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300"
             >
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5">
-                <ShieldCheck className="w-7 h-7 text-secondary" />
+              <div className="w-20 h-20 flex items-center justify-center mb-5">
+                <img src={seloAbvtex} alt="Certificado ABVTEX" className="w-full h-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">
                 Certificado ABVTEX
