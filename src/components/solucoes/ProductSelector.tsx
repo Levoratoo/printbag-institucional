@@ -98,6 +98,15 @@ import handleGorgurao from "@/assets/handle-gorgurao.jpg";
 import handleDalva from "@/assets/handle-dalva.jpg";
 import handleSintetica from "@/assets/handle-sintetica.jpg";
 
+const handleImages: Record<string, string> = {
+  "torcida": handleTorcida,
+  "flat": handleFlat,
+  "sao-francisco": handleSaoFrancisco,
+  "gorgurao": handleGorgurao,
+  "dalva": handleDalva,
+  "sintetica": handleSintetica,
+};
+
 // Direct product categories
 const directProducts = [
   { id: "sacolas", label: "Sacolas", icon: ShoppingBag, image: productSacolas },
