@@ -19,6 +19,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import heroFactory from "@/assets/hero-factory.jpg";
+import seloFsc from "@/assets/selo-fsc.png";
+import seloEnergia from "@/assets/selo-energia-renovavel.png";
+import seloAbvtex from "@/assets/selo-abvtex.jpg";
 import sustainabilityHero from "@/assets/sustainability-hero.jpg";
 import cardPrintmoda from "@/assets/card-printmoda.jpg";
 import cardPrintfood from "@/assets/card-printfood.jpg";
