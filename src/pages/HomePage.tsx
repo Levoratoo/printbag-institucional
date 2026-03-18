@@ -432,7 +432,7 @@ export default function HomePage() {
                 <img src={seloEnergia} loading="lazy" alt="Selo Energia Renovável" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo Energia Renovável</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed text-justify">
+              <p className="text-muted-foreground text-sm leading-relaxed text-left">
                 Reduzimos nossa emissão de gases de efeito estufa a partir da geração de energia renovável.
               </p>
             </motion.div>
