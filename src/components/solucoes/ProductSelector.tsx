@@ -113,6 +113,10 @@ import productEnvelopePadrao from "@/assets/product-envelope-padrao.jpg";
 import productEnvelopeEnobrecido from "@/assets/product-envelope-enobrecido.jpg";
 import productCaixaPadrao from "@/assets/product-caixa-padrao.jpg";
 import productCaixaEnobrecida from "@/assets/product-caixa-enobrecida.jpg";
+import productItensAdicionais from "@/assets/product-itens-adicionais.jpg";
+import productItensFood from "@/assets/product-itens-food.jpg";
+import productSacoFundoQuadrado from "@/assets/product-saco-fundo-quadrado.jpg";
+import productSacoFundoV from "@/assets/product-saco-fundo-v.jpg";
 
 const bagFinishingImages: Record<string, string> = {
   "hot-stamping": finishBagHotStamping,
@@ -141,9 +145,9 @@ const directProducts = [
   { id: "sacolas", label: "Sacolas", icon: ShoppingBag, image: productSacolas },
   { id: "envelopes", label: "Envelopes", icon: FileText, image: productEnvelopes },
   { id: "caixas", label: "Caixas", icon: Box, image: productCaixas },
-  { id: "itens-adicionais", label: "Itens Adicionais", icon: Tag },
+  { id: "itens-adicionais", label: "Itens Adicionais", icon: Tag, image: productItensAdicionais },
   { id: "sacos", label: "Sacos", icon: Package, image: productSacos },
-  { id: "itens-adicionais-food", label: "Itens Adicionais para Food", icon: Utensils }
+  { id: "itens-adicionais-food", label: "Itens Adicionais para Food", icon: Utensils, image: productItensFood }
 ];
 
 // Sub-products for "Itens Adicionais"
@@ -2679,6 +2683,7 @@ export function ProductSelector() {
                 <SelectionCard
                   key={option.id}
                   label={option.label}
+                  image={option.id === "fundo-quadrado" ? productSacoFundoQuadrado : productSacoFundoV}
                   onClick={() => handleSacoTypeSelect(option.id)}
                   index={index}
                 />
