@@ -468,7 +468,7 @@ export default function HomePage() {
                 <img src={premioExcelencia} alt="Prêmio de Excelência Gráfica Fernando Pini" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Excelência Gráfica</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed text-justify">
                 Excelência reconhecida com múltiplos títulos no Prêmio Fernando Pini.
               </p>
             </motion.div>
