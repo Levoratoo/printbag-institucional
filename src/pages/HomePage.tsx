@@ -412,12 +412,12 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-stretch">
             {/* Selo FSC */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300">
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloFsc} loading="lazy" alt="Selo FSC" className="w-full h-full object-contain" />
+              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 flex flex-col">
+              <div className="h-20 flex items-center justify-center mb-5">
+                <img src={seloFsc} loading="lazy" alt="Selo FSC" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo FSC</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -427,9 +427,9 @@ export default function HomePage() {
 
             {/* Selo Energia Renovável */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300">
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloEnergia} loading="lazy" alt="Selo Energia Renovável" className="w-full h-full object-contain" />
+              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 flex flex-col">
+              <div className="h-20 flex items-center justify-center mb-5">
+                <img src={seloEnergia} loading="lazy" alt="Selo Energia Renovável" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo Energia Renovável</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -439,9 +439,9 @@ export default function HomePage() {
 
             {/* Certificado ABVTEX */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300">
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloAbvtex} loading="lazy" alt="Certificado ABVTEX" className="w-full h-full object-contain" />
+              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 flex flex-col">
+              <div className="h-20 flex items-center justify-center mb-5">
+                <img src={seloAbvtex} loading="lazy" alt="Certificado ABVTEX" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Certificado ABVTEX</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -451,9 +451,9 @@ export default function HomePage() {
 
             {/* Selo Two Sides */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300">
-              <div className="w-20 h-20 flex items-center justify-center mb-5">
-                <img src={seloTwoSides} loading="lazy" alt="Selo Two Sides" className="w-full h-full object-contain" />
+              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 flex flex-col">
+              <div className="h-20 flex items-center justify-center mb-5">
+                <img src={seloTwoSides} loading="lazy" alt="Selo Two Sides" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Selo Two Sides</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -463,9 +463,9 @@ export default function HomePage() {
 
             {/* Certificado de Excelência Gráfica */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300">
-              <div className="w-full flex justify-center mb-5">
-                <img src={premioExcelencia} alt="Prêmio de Excelência Gráfica Fernando Pini" className="h-32 w-auto object-contain" />
+              className="bg-card rounded-2xl p-6 shadow-medium border border-border hover:shadow-strong transition-shadow duration-300 flex flex-col">
+              <div className="h-20 flex items-center justify-center mb-5">
+                <img src={premioExcelencia} alt="Prêmio de Excelência Gráfica Fernando Pini" className="max-h-full max-w-full object-contain" />
               </div>
               <h3 className="text-lg font-heading font-bold text-foreground mb-3">Excelência Gráfica</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
