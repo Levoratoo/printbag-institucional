@@ -161,6 +161,14 @@ export default function SustentabilidadePage() {
       {/* Impact Numbers */}
       <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-secondary-foreground/60 text-sm font-medium uppercase tracking-wider mb-8"
+          >
+            Dados acumulados — Janeiro e Fevereiro de 2026
+          </motion.p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {impactNumbers.map((stat, index) => (
               <motion.div
@@ -172,7 +180,7 @@ export default function SustentabilidadePage() {
                 className="text-center"
               >
                 <div className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-secondary-foreground mb-2">
-                  {stat.value}
+                  <CountUp value={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-secondary-foreground/70 text-sm md:text-base">{stat.label}</div>
               </motion.div>
