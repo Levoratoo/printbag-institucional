@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import sustainabilityHero from "@/assets/sustainability-hero-bags.jpg";
-import seloFsc from "@/assets/selo-fsc.png";
+import seloFsc from "@/assets/selo-fsc-new.png";
 import seloEnergiaRenovavel from "@/assets/selo-energia-renovavel.png";
 import seloAbvtex from "@/assets/selo-abvtex.jpg";
 import seloTwoSides from "@/assets/selo-two-sides.png";
