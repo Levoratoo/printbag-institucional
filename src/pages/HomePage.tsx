@@ -37,7 +37,7 @@ import sectorAtacado from "@/assets/sector-atacado.jpg";
 // Client logos - Alphabetical order
 import logoAramis from "@/assets/clients/aramis.png";
 
-import logoCarolinaHerrera from "@/assets/clients/carolina-herrera.png";
+
 import logoClaro from "@/assets/clients/claro.png";
 import logoConstance from "@/assets/clients/constance.png";
 import logoDemocrata from "@/assets/clients/democrata.png";
