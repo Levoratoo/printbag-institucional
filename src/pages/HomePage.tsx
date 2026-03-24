@@ -55,7 +55,7 @@ import logoVivo from "@/assets/clients/vivo.png";
 
 const clients = [
   { name: "Aramis", logo: logoAramis },
-  { name: "Carolina Herrera", logo: logoCarolinaHerrera },
+  
   { name: "Claro", logo: logoClaro },
   { name: "Constance", logo: logoConstance },
   { name: "Democrata", logo: logoDemocrata },
