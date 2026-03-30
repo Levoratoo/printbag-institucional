@@ -11,6 +11,7 @@ import SustentabilidadePage from "./pages/SustentabilidadePage";
 import ContatoPage from "./pages/ContatoPage";
 import PrivacidadePage from "./pages/PrivacidadePage";
 import TrabalheConoscoPage from "./pages/TrabalheConoscoPage";
+import UnsubscribePage from "./pages/UnsubscribePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
