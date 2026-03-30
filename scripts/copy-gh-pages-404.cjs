@@ -1,6 +1,6 @@
 /**
  * GitHub Pages serves 404.html for unknown paths. Copy the SPA shell so
- * client-side routes work on refresh (e.g. /printbag-magic-builder/sobre).
+ * client-side routes work on refresh (e.g. /printbag-institucional/sobre).
  */
 const fs = require("fs");
 const path = require("path");

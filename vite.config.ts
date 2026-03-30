@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/printbag-magic-builder/",
+  base: "/printbag-institucional/",
   server: {
     host: "192.168.1.104",
     port: 3017,
