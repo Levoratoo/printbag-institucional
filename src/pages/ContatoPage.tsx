@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Layout } from "@/components/layout/Layout";
+import { submitContatoWeb3 } from "@/lib/submitContatoWeb3";
 import { toast } from "sonner";
 
 const volumeOptions = [
@@ -71,11 +72,18 @@ export default function ContatoPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const result = await submitContatoWeb3(formData);
+
+    if (!result.ok) {
+      toast.error("Não foi possível enviar", {
+        description: result.message,
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     toast.success("Mensagem enviada com sucesso!", {
-      description: "Nossa equipe entrará em contato em breve."
+      description: "Nossa equipe entrará em contato em breve.",
     });
 
     setFormData({
@@ -86,7 +94,7 @@ export default function ContatoPage() {
       telefone: "",
       tipoEmbalagem: "",
       volume: "",
-      mensagem: ""
+      mensagem: "",
     });
     setIsSubmitting(false);
   };

@@ -28,6 +28,30 @@ npm run build
 
 Gera a pasta `dist/` e copia `404.html` para fallback de SPA no GitHub Pages.
 
+## Formulário de contato (e-mail)
+
+O envio usa **[Web3Forms](https://web3forms.com)** (gratuito, sem servidor): cada destino tem uma *Access Key* no painel.
+
+1. Crie uma conta em [web3forms.com](https://web3forms.com) e adicione **4 formulários**, cada um com o e-mail de recebimento:
+   - `marketing@printbag.com.br` → chave usada em `VITE_WEB3FORMS_MARKETING`
+   - `rh@printbag.com.br` → `VITE_WEB3FORMS_RH`
+   - `compras@printbag.com.br` → `VITE_WEB3FORMS_COMPRAS`
+   - `sac@printbag.com.br` → `VITE_WEB3FORMS_SAC`
+2. No painel, restrinja o domínio permitido (ex.: `printbag.com.br` e, se quiser testar, `github.io`).
+3. Copie `.env.example` para `.env` e preencha as chaves. O Vite só lê variáveis no build (`VITE_*`).
+4. **GitHub Actions:** em **Settings → Secrets and variables → Actions**, crie os mesmos nomes (`VITE_WEB3FORMS_MARKETING`, etc.) com os valores. O workflow de deploy já injeta essas variáveis no `npm run build`.
+
+Roteamento por assunto no site:
+
+| Assunto | E-mail |
+|--------|--------|
+| Fazer um orçamento | marketing |
+| Falar com Marketing | marketing |
+| Falar com Recursos Humanos | rh |
+| Quero ser um Fornecedor | compras |
+| Sugestão ou Reclamação | sac |
+| Outros | marketing |
+
 ## Publicação (GitHub Pages)
 
 O repositório publica o conteúdo de `dist/` na branch **`gh-pages`** (workflow em `.github/workflows/deploy-gh-pages.yml` ou deploy manual equivalente).
