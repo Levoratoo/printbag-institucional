@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseEnvConfigured, supabase } from "@/integrations/supabase/client";
 import {
   Phone,
   Mail,
@@ -69,13 +69,6 @@ function getRecipientEmail(assunto: string): string {
   }
 }
 
-function isSupabaseConfigured(): boolean {
-  return Boolean(
-    import.meta.env.VITE_SUPABASE_URL?.trim() &&
-      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim(),
-  );
-}
-
 export default function ContatoPage() {
   const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState(() => {
@@ -112,7 +105,7 @@ export default function ContatoPage() {
     };
 
     try {
-      if (isSupabaseConfigured()) {
+      if (isSupabaseEnvConfigured()) {
         const id = crypto.randomUUID();
         const recipientEmail = getRecipientEmail(formData.assunto);
 

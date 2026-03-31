@@ -19,10 +19,15 @@ export default function UnsubscribePage() {
       return;
     }
 
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
+    if (!supabaseUrl || !anonKey) {
+      setStatus("invalid");
+      return;
+    }
+
     const validate = async () => {
       try {
-        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-        const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
         const res = await fetch(
           `${supabaseUrl}/functions/v1/handle-email-unsubscribe?token=${token}`,
           { headers: { apikey: anonKey } }
