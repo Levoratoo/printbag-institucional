@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
 import { 
   Phone, 
   Mail, 
@@ -68,59 +67,55 @@ export default function ContatoPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const getRecipientEmail = (assunto: string): string => {
-    switch (assunto) {
-      case "Falar com Recursos Humanos":
-        return "rh@printbag.com.br";
-      case "Quero ser um Fornecedor":
-        return "compras@printbag.com.br";
-      case "Sugestão ou Reclamação":
-        return "sac@printbag.com.br";
-      default:
-        return "marketing@printbag.com.br";
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const id = crypto.randomUUID();
-      const recipientEmail = getRecipientEmail(formData.assunto);
+      const isOrcamento = formData.assunto === "Fazer um orçamento";
 
-      await supabase.functions.invoke("send-transactional-email", {
-        body: {
-          templateName: "contact-form-notification",
-          recipientEmail,
-          idempotencyKey: `contact-${id}`,
-          templateData: {
-            nome: formData.nome,
-            empresa: formData.empresa || undefined,
-            assunto: formData.assunto,
-            email: formData.email,
-            telefone: formData.telefone,
-            tipoEmbalagem: formData.tipoEmbalagem || undefined,
-            volume: formData.volume || undefined,
-            mensagem: formData.mensagem || undefined,
-          },
-        },
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "e234f2e3-f57d-47df-bc07-05a0e8aa7ca8",
+          subject: `Contato Printbag: ${formData.assunto}`,
+          from_name: "Printbag Website",
+          nome: formData.nome,
+          empresa: formData.empresa,
+          assunto: formData.assunto,
+          email: formData.email,
+          telefone: formData.telefone,
+          mensagem: formData.mensagem,
+          ...(isOrcamento && {
+            tipoEmbalagem: formData.tipoEmbalagem,
+            volume: formData.volume,
+          }),
+        }),
       });
 
-      toast.success("Mensagem enviada com sucesso!", {
-        description: "Nossa equipe entrará em contato em breve.",
-      });
+      const data = await response.json();
 
-      setFormData({
-        nome: "",
-        empresa: "",
-        assunto: "",
-        email: "",
-        telefone: "",
-        tipoEmbalagem: "",
-        volume: "",
-        mensagem: "",
-      });
+      if (data.success) {
+        toast.success("Mensagem enviada com sucesso!", {
+          description: "Nossa equipe entrará em contato em breve.",
+        });
+
+        setFormData({
+          nome: "",
+          empresa: "",
+          assunto: "",
+          email: "",
+          telefone: "",
+          tipoEmbalagem: "",
+          volume: "",
+          mensagem: "",
+        });
+      } else {
+        toast.error("Erro ao enviar mensagem.", {
+          description: "Tente novamente mais tarde.",
+        });
+      }
     } catch {
       toast.error("Erro ao enviar mensagem.", {
         description: "Tente novamente mais tarde.",
